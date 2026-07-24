@@ -1,0 +1,29 @@
+{
+    "candidate_id": "4556029",
+    "job_id": "8fe7c852-fc41-4ab1-a45d-db522f9a9b41",
+    "candidate_name": "曹珺",
+    "job_title": "Accounting Manager",
+    "score": 68.0,
+    "matched_skills": [
+        "财务分析",
+        "会计",
+        "审计"
+    ],
+    "missing_required_skills": [
+        "2+ years in a supervisory or management role",
+        "Advanced proficiency in Microsoft Excel",
+        "Experience using ERP systems (e.g., NetSuite, SAP) or accounting software (e.g., QuickBooks, Sage)",
+        "Professional accounting designation (e.g., CPA, CMA, or CGA)"
+    ],
+    "strengths": [
+        "9 years of work experience including 6 years in Fortune 500 companies",
+        "Strong experience in accounting and auditing tasks",
+        "Fluent in English, which supports communication in diverse teams"
+    ],
+    "concerns": [
+        "Lacks supervisory or management experience for 2+ years as required",
+        "No experience mentioned with advanced Excel functionalities or ERP systems",
+        "No professional accounting designation, which is preferred for the role"
+    ],
+    "recommendation": "Consider for a role with lower management responsibilities or additional mentoring to fulfill leadership requirements."
+}

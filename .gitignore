@@ -1,0 +1,18 @@
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+airs_venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+
+# Temporary files
+*.log
+.DS_Store
+Thumbs.db
+.env
