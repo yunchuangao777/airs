@@ -7,7 +7,8 @@ from components.job_library import render_job_library
 
 
 def render_job_management():
-    st.header("Job Management")
+
+    # st.header("Job Management")
 
     if st.session_state.get("job_created_message"):
         st.success(
