@@ -23,12 +23,12 @@ def render_sidebar() -> str:
     st.sidebar.markdown("### Navigation")
 
     render_nav_button(
-        display_name="CV Management",
+        display_name="简历管理",
         page_name="CV Management",
     )
 
     render_nav_button(
-        display_name="Job Management",
+        display_name="岗位管理",
         page_name="Job Management",
     )
 
