@@ -32,15 +32,17 @@ def render_sidebar() -> str:
         page_name="Job Management",
     )
 
-    render_nav_button(
-        display_name="Job Matching",
-        page_name="Job Matching",
-    )
+    
+    # render_nav_button(
+        # display_name="Job Matching",
+        # page_name="Job Matching",
+    # )
 
-    render_nav_button(
-        display_name="Interview Prep",
-        page_name="Interview Prep",
-    )
+    # render_nav_button(
+        # display_name="Interview Prep",
+        # page_name="Interview Prep",
+    # )
+    
 
     return st.session_state["current_page"]
 
