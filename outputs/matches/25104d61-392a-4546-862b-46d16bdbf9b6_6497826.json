@@ -1,0 +1,29 @@
+{
+    "candidate_id": "6497826",
+    "job_id": "25104d61-392a-4546-862b-46d16bdbf9b6",
+    "candidate_name": "孙雯彬",
+    "job_title": "HR Manager",
+    "score": 20.0,
+    "matched_skills": [],
+    "missing_required_skills": [
+        "HR experience",
+        "HR management skills",
+        "Employee Relations",
+        "Talent Management",
+        "HR certifications"
+    ],
+    "strengths": [
+        "Over 8 years of accounting and finance experience",
+        "Proficient in SAP",
+        "Strong analytical skills",
+        "Experience in managing accounts payable",
+        "Ability to coordinate with entities such as tax authorities"
+    ],
+    "concerns": [
+        "No relevant HR experience or education",
+        "Does not meet the required experience years in an HR role",
+        "Lacks necessary HR certifications",
+        "Skills primarily focused on accounting rather than HR practices"
+    ],
+    "recommendation": "Not a suitable fit for the HR Manager position."
+}

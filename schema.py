@@ -1,5 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import List, Optional
+from datetime import datetime
+from enum import Enum
 
 class Experience(BaseModel):
     company: Optional[str] = None
@@ -18,24 +20,33 @@ class Education(BaseModel):
 
 class CVInfo(BaseModel):
 
-    candidate_id: str
-    source_filename: Optional[str] = None
-    upload_time: Optional[str] = None
+    candidate_id: str | None = None
+    cv_hash: str | None = None
 
-    name: Optional[str] = None
-    email: Optional[str] = None
-    phone: Optional[str] = None
-    location: Optional[str] = None
+    source_filename: str | None = None
+    source_filepath: str | None = None
+    upload_time: str | None = None
+    raw_text: str | None = None
 
-    summary: Optional[str] = None
+    name: str | None = None
+    email: str | None = None
+    phone: str | None = None
+    location: str | None = None
+    summary: str | None = None
 
-    skills: List[str] = Field(default_factory=list)
+    skills: list[str] = Field(
+        default_factory=list
+    )
 
-    education: List[Education] = Field(default_factory=list)
+    education: list[dict] = Field(
+        default_factory=list
+    )
 
-    work_experience: List[Experience] = Field(default_factory=list)
+    work_experience: list[dict] = Field(
+        default_factory=list
+    )
 
-    total_years_experience: Optional[float] = None
+    total_years_experience: float | None = None
 
     raw_text: Optional[str] = None
     source_filepath: Optional[str] = None
@@ -91,4 +102,59 @@ class InterviewPrep(BaseModel):
     key_concerns: List[str] = Field(default_factory=list)
     interview_focus_areas: List[str] = Field(default_factory=list)
 
-    
+class CandidateStatus(str, Enum):
+    NONE = "none"
+    APPLIED = "applied"
+    REVIEW = "review"
+    INTERVIEW = "interview"
+    OFFER = "offer"
+    ACCEPTED = "accepted"
+    REJECTED = "rejected"
+    ARCHIVED = "archived"
+
+
+class StatusHistoryItem(BaseModel):
+    status: CandidateStatus
+    changed_time: str
+    note: Optional[str] = None
+
+
+class ApplicationRecord(BaseModel):
+    application_id: str
+
+    candidate_id: str
+    job_id: str
+
+    status: CandidateStatus = CandidateStatus.NONE
+
+    created_time: str
+    updated_time: str
+
+    notes: Optional[str] = None
+
+    status_history: list[StatusHistoryItem] = Field(
+        default_factory=list
+    )    
+
+class MatchResult(BaseModel):
+    candidate_id: Optional[str] = None
+    job_id: Optional[str] = None
+
+    candidate_name: Optional[str] = None
+    job_title: Optional[str] = None
+
+    match_method: str = "ai"
+    score: float = 0.0
+
+    skill_score: Optional[float] = None
+    experience_score: Optional[float] = None
+    education_score: Optional[float] = None
+    location_score: Optional[float] = None
+
+    matched_skills: List[str] = Field(default_factory=list)
+    missing_required_skills: List[str] = Field(default_factory=list)
+
+    strengths: List[str] = Field(default_factory=list)
+    concerns: List[str] = Field(default_factory=list)
+
+    recommendation: Optional[str] = None

@@ -1,0 +1,24 @@
+{
+    "candidate_id": "13234064",
+    "job_id": "25104d61-392a-4546-862b-46d16bdbf9b6",
+    "candidate_name": "郝秋君",
+    "job_title": "HR Manager",
+    "match_method": "ai",
+    "score": 30.0,
+    "skill_score": 0.0,
+    "experience_score": 0.0,
+    "education_score": 0.0,
+    "location_score": 0.0,
+    "matched_skills": [],
+    "missing_required_skills": [
+        "HR experience",
+        "Employee Relations skills",
+        "Talent Management experience",
+        "HR certifications"
+    ],
+    "strengths": [],
+    "concerns": [
+        "Candidate lacks relevant HR experience and skills. No certifications related to HR are present. Overall industry experience in accounting does not align with requirements stated in the HR Manager position. Candidate’s education background is also unrelated to HR management."
+    ],
+    "recommendation": "Not recommended for the HR Manager position."
+}

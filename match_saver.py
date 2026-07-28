@@ -7,20 +7,33 @@ MATCH_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def save_match_result(match_result):
+    match_method = (
+        getattr(
+            match_result,
+            "match_method",
+            None,
+        )
+        or "ai"
+    )
 
     filename = (
         f"{match_result.job_id}_"
-        f"{match_result.candidate_id}.json"
+        f"{match_result.candidate_id}_"
+        f"{match_method}.json"
     )
 
-    path = MATCH_DIR / filename
+    output_path = MATCH_DIR / filename
 
-    with open(path, "w", encoding="utf-8") as f:
+    with open(
+        output_path,
+        "w",
+        encoding="utf-8",
+    ) as file:
         json.dump(
             match_result.model_dump(),
-            f,
+            file,
             ensure_ascii=False,
-            indent=4
+            indent=4,
         )
 
-    return path
+    return output_path

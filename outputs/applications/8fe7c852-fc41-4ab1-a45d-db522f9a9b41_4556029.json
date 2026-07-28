@@ -1,0 +1,16 @@
+{
+    "application_id": "92f8d58d-5207-4e1b-91bd-c1a98d7276e7",
+    "candidate_id": "4556029",
+    "job_id": "8fe7c852-fc41-4ab1-a45d-db522f9a9b41",
+    "status": "none",
+    "created_time": "2026-07-26T23:03:27",
+    "updated_time": "2026-07-26T23:03:27",
+    "notes": null,
+    "status_history": [
+        {
+            "status": "none",
+            "changed_time": "2026-07-26T23:03:27",
+            "note": "Application record created"
+        }
+    ]
+}

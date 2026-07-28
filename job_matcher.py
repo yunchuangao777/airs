@@ -45,5 +45,6 @@ def match_candidate_to_job(candidate: dict, job: dict) -> MatchResult:
     result.job_id = job.get("job_id")
     result.candidate_name = candidate.get("name")
     result.job_title = job.get("job_title")
+    result.match_method = "ai"
 
     return result

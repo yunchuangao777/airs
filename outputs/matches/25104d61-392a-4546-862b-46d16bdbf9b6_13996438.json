@@ -1,0 +1,26 @@
+{
+    "candidate_id": "13996438",
+    "job_id": "25104d61-392a-4546-862b-46d16bdbf9b6",
+    "candidate_name": "张佳骏",
+    "job_title": "HR Manager",
+    "score": 35.0,
+    "matched_skills": [],
+    "missing_required_skills": [
+        "经验年限",
+        "人力资源管理知识",
+        "招聘与保留策略",
+        "员工关系管理",
+        "HRIS软件熟练度"
+    ],
+    "strengths": [
+        "五年会计工作经验",
+        "良好的问题解决能力",
+        "详细和细致的工作习惯"
+    ],
+    "concerns": [
+        "缺乏人力资源管理经验",
+        "不符合岗位要求的学历背景",
+        "未持有相关的HR专业认证"
+    ],
+    "recommendation": "建议寻找具有人力资源背景和经验的候选人。"
+}

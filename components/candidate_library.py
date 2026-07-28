@@ -7,7 +7,7 @@ from match_loader import (
     load_all_jobs,
     load_matches_by_candidate,
 )
-from utils.file_helpers import dataframe_to_excel_bytes
+from utils.file_helpers import candidates_to_pdf_bytes
 from utils.formatters import format_education, format_skills
 
 
@@ -17,14 +17,6 @@ def get_candidate_match_summary(
 ) -> dict:
     """
     Return match-related information for one candidate.
-
-    Example:
-    {
-        "matched_jobs": ["Senior Accountant", "Finance Manager"],
-        "matched_job_ids": ["job-1", "job-2"],
-        "best_match_score": 91,
-        "best_matched_job": "Senior Accountant"
-    }
     """
     matches = load_matches_by_candidate(candidate_id)
 
@@ -36,8 +28,8 @@ def get_candidate_match_summary(
             "best_matched_job": "",
         }
 
-    matched_jobs = []
-    matched_job_ids = []
+    matched_jobs: list[str] = []
+    matched_job_ids: list[str] = []
 
     for match in matches:
         job_id = match.get("job_id")
@@ -49,14 +41,17 @@ def get_candidate_match_summary(
             or "Untitled Job"
         )
 
-        matched_jobs.append(job_title)
+        if job_title not in matched_jobs:
+            matched_jobs.append(job_title)
 
-        if job_id:
+        if job_id and job_id not in matched_job_ids:
             matched_job_ids.append(job_id)
 
     best_match = max(
         matches,
-        key=lambda item: float(item.get("score", 0) or 0),
+        key=lambda item: float(
+            item.get("score", 0) or 0
+        ),
     )
 
     best_job_id = best_match.get("job_id")
@@ -78,26 +73,25 @@ def get_candidate_match_summary(
     }
 
 
-def render_candidate_library():
-    candidates = load_all_candidates()
-    jobs = load_all_jobs()
-
-    st.markdown("## Candidate Library")
-
-    if not candidates:
-        st.info("No CVs loaded yet.")
-        return
-
-    jobs_by_id = {
-        job.get("job_id"): job
-        for job in jobs
-        if job.get("job_id")
-    }
-
-    table_rows = []
+def build_candidate_dataframe(
+    candidates: list[dict],
+    jobs_by_id: dict,
+) -> pd.DataFrame:
+    """
+    Convert candidate records into the table used by the UI.
+    """
+    table_rows: list[dict] = []
 
     for candidate in candidates:
-        candidate_id = candidate.get("candidate_id") or ""
+        candidate_id = (
+            candidate.get("candidate_id") or ""
+        )
+
+        candidate_skills = [
+            str(skill).strip()
+            for skill in candidate.get("skills", [])
+            if str(skill).strip()
+        ]
 
         match_summary = get_candidate_match_summary(
             candidate_id=candidate_id,
@@ -117,7 +111,7 @@ def render_candidate_library():
                     candidate.get("education", [])
                 ),
                 "Skills": format_skills(
-                    candidate.get("skills", []),
+                    candidate_skills,
                     max_items=8,
                 ),
                 "Experience (Years)": candidate.get(
@@ -137,14 +131,37 @@ def render_candidate_library():
                 ),
                 "Candidate ID": candidate_id,
 
-                # Internal filter field; hidden from the table.
+                # Internal fields used only for filtering.
+                "_All Skills": candidate_skills,
                 "_Matched Job IDs": match_summary[
                     "matched_job_ids"
                 ],
             }
         )
 
-    candidate_df = pd.DataFrame(table_rows)
+    return pd.DataFrame(table_rows)
+
+
+def render_candidate_library() -> None:
+    candidates = load_all_candidates()
+    jobs = load_all_jobs()
+
+    # st.markdown("## Candidate Library")
+
+    if not candidates:
+        st.info("No CVs loaded yet.")
+        return
+
+    jobs_by_id = {
+        job.get("job_id"): job
+        for job in jobs
+        if job.get("job_id")
+    }
+
+    candidate_df = build_candidate_dataframe(
+        candidates=candidates,
+        jobs_by_id=jobs_by_id,
+    )
 
     # =========================================================
     # Global search
@@ -154,8 +171,8 @@ def render_candidate_library():
     keyword = st.text_input(
         "Search candidates",
         placeholder=(
-            "Search name, email, skill, school, company, "
-            "location, or source file..."
+            "Search name, email, skill, school, "
+            "location, job, or source file..."
         ),
         key="candidate_global_search",
     )
@@ -165,64 +182,109 @@ def render_candidate_library():
     # =========================================================
     st.markdown("### 📊 Filters")
 
-    filter_row1_col1, filter_row1_col2, filter_row1_col3 = (
-        st.columns(3)
-    )
+    filter_col1, filter_col2, filter_col3 = st.columns(3)
 
-    with filter_row1_col1:
+    # ---------------------------------------------------------
+    # Skill filter
+    # ---------------------------------------------------------
+    with filter_col1:
         skill_options = sorted(
             {
-                skill
+                str(skill).strip()
                 for candidate in candidates
                 for skill in candidate.get("skills", [])
-                if skill
+                if str(skill).strip()
             },
             key=str.lower,
         )
 
-        selected_skills = st.multiselect(
-            "Skills",
-            options=skill_options,
+        selected_skill = st.selectbox(
+            "Skill",
+            options=[
+                "Any skill",
+                *skill_options,
+                "Other...",
+            ],
             key="candidate_skill_filter",
         )
 
-    with filter_row1_col2:
+        typed_skill = ""
+
+        if selected_skill == "Other...":
+            typed_skill = st.text_input(
+                "Specify skill",
+                placeholder="Example: Power BI",
+                key="candidate_typed_skill",
+            )
+
+    # ---------------------------------------------------------
+    # Location filter
+    # ---------------------------------------------------------
+    with filter_col2:
         location_options = sorted(
             {
-                candidate.get("location")
+                str(candidate.get("location")).strip()
                 for candidate in candidates
                 if candidate.get("location")
             },
             key=str.lower,
         )
 
-        selected_locations = st.multiselect(
-            "Locations",
-            options=location_options,
+        selected_location = st.selectbox(
+            "Location",
+            options=[
+                "Any location",
+                *location_options,
+                "Other...",
+            ],
             key="candidate_location_filter",
         )
 
-    with filter_row1_col3:
-        education_options = [
-            "Bachelor",
-            "Master",
-            "MBA",
-            "PhD",
-            "Diploma",
-            "Certificate",
-        ]
+        typed_location = ""
 
-        selected_education = st.multiselect(
-            "Education level",
-            options=education_options,
+        if selected_location == "Other...":
+            typed_location = st.text_input(
+                "Specify location",
+                placeholder="City, province, or country",
+                key="candidate_typed_location",
+            )
+
+    # ---------------------------------------------------------
+    # Education filter
+    # ---------------------------------------------------------
+    with filter_col3:
+        selected_education = st.selectbox(
+            "Education",
+            options=[
+                "Any education",
+                "Bachelor",
+                "Master",
+                "MBA",
+                "PhD",
+                "Diploma",
+                "Certificate",
+                "Other...",
+            ],
             key="candidate_education_filter",
         )
 
-    filter_row2_col1, filter_row2_col2, filter_row2_col3 = (
-        st.columns(3)
-    )
+        typed_education = ""
 
-    with filter_row2_col1:
+        if selected_education == "Other...":
+            typed_education = st.text_input(
+                "Specify education",
+                placeholder=(
+                    "Degree, major, qualification, or school"
+                ),
+                key="candidate_typed_education",
+            )
+
+    filter_col4, filter_col5, filter_col6 = st.columns(3)
+
+    # ---------------------------------------------------------
+    # Experience filter
+    # ---------------------------------------------------------
+    with filter_col4:
         min_experience = st.number_input(
             "Minimum experience",
             min_value=0.0,
@@ -231,10 +293,13 @@ def render_candidate_library():
             key="candidate_min_experience",
         )
 
-    with filter_row2_col2:
+    # ---------------------------------------------------------
+    # Matched-job filter
+    # ---------------------------------------------------------
+    with filter_col5:
         job_options = {
             (
-                f"{job.get('job_title', 'Untitled Job')}"
+                f"{job.get('job_title') or 'Untitled Job'}"
                 + (
                     f" — {job.get('company')}"
                     if job.get("company")
@@ -247,7 +312,10 @@ def render_candidate_library():
 
         selected_job_label = st.selectbox(
             "Matched job",
-            options=["Any job"] + list(job_options.keys()),
+            options=[
+                "Any job",
+                *job_options.keys(),
+            ],
             key="candidate_matched_job_filter",
         )
 
@@ -257,7 +325,10 @@ def render_candidate_library():
             else job_options[selected_job_label]
         )
 
-    with filter_row2_col3:
+    # ---------------------------------------------------------
+    # Match-score filter
+    # ---------------------------------------------------------
+    with filter_col6:
         min_match_score = st.number_input(
             "Minimum match score",
             min_value=0.0,
@@ -267,7 +338,10 @@ def render_candidate_library():
             key="candidate_min_match_score",
         )
 
-    clear_col, spacer_col = st.columns([1, 5])
+    # =========================================================
+    # Clear filters
+    # =========================================================
+    clear_col, _ = st.columns([1, 5])
 
     with clear_col:
         if st.button(
@@ -278,24 +352,73 @@ def render_candidate_library():
             keys_to_clear = [
                 "candidate_global_search",
                 "candidate_skill_filter",
+                "candidate_typed_skill",
                 "candidate_location_filter",
+                "candidate_typed_location",
                 "candidate_education_filter",
+                "candidate_typed_education",
                 "candidate_min_experience",
                 "candidate_matched_job_filter",
                 "candidate_min_match_score",
             ]
 
             for key in keys_to_clear:
-                if key in st.session_state:
-                    del st.session_state[key]
+                st.session_state.pop(key, None)
 
             st.rerun()
+
+    # =========================================================
+    # Prepare filter values
+    # =========================================================
+    skill_filter = ""
+
+    if selected_skill not in {
+        "Any skill",
+        "Other...",
+    }:
+        skill_filter = selected_skill.strip().lower()
+
+    elif selected_skill == "Other...":
+        skill_filter = typed_skill.strip().lower()
+
+    location_filter = ""
+
+    if selected_location not in {
+        "Any location",
+        "Other...",
+    }:
+        location_filter = (
+            selected_location.strip().lower()
+        )
+
+    elif selected_location == "Other...":
+        location_filter = (
+            typed_location.strip().lower()
+        )
+
+    education_filter = ""
+
+    if selected_education not in {
+        "Any education",
+        "Other...",
+    }:
+        education_filter = (
+            selected_education.strip().lower()
+        )
+
+    elif selected_education == "Other...":
+        education_filter = (
+            typed_education.strip().lower()
+        )
 
     # =========================================================
     # Apply search and filters
     # =========================================================
     filtered_df = candidate_df.copy()
 
+    # ---------------------------------------------------------
+    # Global search
+    # ---------------------------------------------------------
     if keyword.strip():
         search_text = keyword.strip().lower()
 
@@ -311,69 +434,76 @@ def render_candidate_library():
             "Source File",
         ]
 
-        mask = filtered_df[searchable_columns].fillna("").apply(
-            lambda row: row.astype(str)
-            .str.lower()
-            .str.contains(
-                search_text,
-                regex=False,
+        mask = (
+            filtered_df[searchable_columns]
+            .fillna("")
+            .apply(
+                lambda row: (
+                    row.astype(str)
+                    .str.lower()
+                    .str.contains(
+                        search_text,
+                        regex=False,
+                    )
+                    .any()
+                ),
+                axis=1,
             )
-            .any(),
-            axis=1,
         )
 
         filtered_df = filtered_df[mask]
 
-    if selected_skills:
-        selected_skills_lower = {
-            skill.lower()
-            for skill in selected_skills
-        }
-
+    # ---------------------------------------------------------
+    # Skill
+    # ---------------------------------------------------------
+    if skill_filter:
         filtered_df = filtered_df[
-            filtered_df["Skills"]
-            .fillna("")
-            .apply(
-                lambda value: selected_skills_lower.issubset(
-                    {
-                        skill.strip().lower()
-                        for skill in str(value).split(",")
-                    }
+            filtered_df["_All Skills"].apply(
+                lambda skills: (
+                    any(
+                        skill_filter
+                        in str(skill).strip().lower()
+                        for skill in skills
+                    )
+                    if isinstance(skills, list)
+                    else False
                 )
             )
         ]
 
-    if selected_locations:
-        selected_locations_lower = {
-            location.lower()
-            for location in selected_locations
-        }
-
+    # ---------------------------------------------------------
+    # Location
+    # ---------------------------------------------------------
+    if location_filter:
         filtered_df = filtered_df[
             filtered_df["Location"]
             .fillna("")
-            .str.lower()
-            .isin(selected_locations_lower)
-        ]
-
-    if selected_education:
-        education_terms = [
-            value.lower()
-            for value in selected_education
-        ]
-
-        filtered_df = filtered_df[
-            filtered_df["Education"]
-            .fillna("")
-            .str.lower()
             .apply(
-                lambda value: any(
-                    term in value
-                    for term in education_terms
+                lambda value: (
+                    location_filter
+                    in str(value).lower()
                 )
             )
         ]
 
+    # ---------------------------------------------------------
+    # Education
+    # ---------------------------------------------------------
+    if education_filter:
+        filtered_df = filtered_df[
+            filtered_df["Education"]
+            .fillna("")
+            .apply(
+                lambda value: (
+                    education_filter
+                    in str(value).lower()
+                )
+            )
+        ]
+
+    # ---------------------------------------------------------
+    # Experience
+    # ---------------------------------------------------------
     if min_experience > 0:
         experience_values = pd.to_numeric(
             filtered_df["Experience (Years)"],
@@ -384,6 +514,9 @@ def render_candidate_library():
             experience_values >= min_experience
         ]
 
+    # ---------------------------------------------------------
+    # Matched job
+    # ---------------------------------------------------------
     if selected_job_id:
         filtered_df = filtered_df[
             filtered_df["_Matched Job IDs"].apply(
@@ -395,6 +528,9 @@ def render_candidate_library():
             )
         ]
 
+    # ---------------------------------------------------------
+    # Match score
+    # ---------------------------------------------------------
     if min_match_score > 0:
         match_scores = pd.to_numeric(
             filtered_df["Best Match Score"],
@@ -415,18 +551,24 @@ def render_candidate_library():
     # =========================================================
     st.markdown("### 📤 Export")
 
+    internal_columns = [
+        "Candidate ID",
+        "_All Skills",
+        "_Matched Job IDs",
+    ]
+
     export_df = filtered_df.drop(
-        columns=[
-            "Candidate ID",
-            "_Matched Job IDs",
-        ],
+        columns=internal_columns,
         errors="ignore",
     )
 
-    export_col1, export_col2, export_spacer = st.columns(
+    export_col1, export_col2, _ = st.columns(
         [1, 1, 4]
     )
 
+    # ---------------------------------------------------------
+    # CSV export
+    # ---------------------------------------------------------
     with export_col1:
         csv_data = export_df.to_csv(
             index=False,
@@ -442,19 +584,51 @@ def render_candidate_library():
             key="candidate_export_csv",
         )
 
+    # ---------------------------------------------------------
+    # PDF export
+    # ---------------------------------------------------------
     with export_col2:
-        excel_data = dataframe_to_excel_bytes(export_df)
+        # Candidate ID is still available in filtered_df.
+        filtered_candidate_ids = {
+            str(candidate_id)
+            for candidate_id in (
+                filtered_df["Candidate ID"]
+                .dropna()
+                .tolist()
+            )
+            if str(candidate_id).strip()
+        }
+
+        filtered_candidates = [
+            candidate
+            for candidate in candidates
+            if str(
+                candidate.get("candidate_id") or ""
+            )
+            in filtered_candidate_ids
+        ]
+
+        # Preserve the match fields shown in the candidate table.
+        candidate_rows = {
+            str(row["Candidate ID"]): row.to_dict()
+            for _, row in filtered_df.iterrows()
+            if str(
+                row.get("Candidate ID") or ""
+            ).strip()
+        }
+
+        pdf_data = candidates_to_pdf_bytes(
+            candidates=filtered_candidates,
+            candidate_rows=candidate_rows,
+        )
 
         st.download_button(
-            label="Download Excel",
-            data=excel_data,
-            file_name="candidates_filtered.xlsx",
-            mime=(
-                "application/vnd.openxmlformats-officedocument."
-                "spreadsheetml.sheet"
-            ),
+            label="Download PDF",
+            data=pdf_data,
+            file_name="candidate_report.pdf",
+            mime="application/pdf",
             use_container_width=True,
-            key="candidate_export_excel",
+            key="candidate_export_pdf",
         )
 
     st.divider()
@@ -462,16 +636,25 @@ def render_candidate_library():
     # =========================================================
     # Candidate list
     # =========================================================
-    st.markdown("### Candidate List")
+    # st.markdown("### Candidate List")
 
     st.caption(
-        "Select a candidate row to open the full candidate profile."
+        "Select a candidate row to open the full "
+        "candidate profile."
     )
 
     display_df = filtered_df.drop(
-        columns=["_Matched Job IDs"],
+        columns=[
+            "_All Skills",
+            "_Matched Job IDs",
+        ],
         errors="ignore",
     ).reset_index(drop=True)
+
+    table_version = st.session_state.get(
+        "candidate_table_version",
+        0,
+    )
 
     event = st.dataframe(
         display_df,
@@ -479,7 +662,10 @@ def render_candidate_library():
         hide_index=True,
         on_select="rerun",
         selection_mode="single-row",
-        key="candidate_library_table",
+        key=(
+            f"candidate_library_table_"
+            f"{table_version}"
+        ),
         column_config={
             "Name": st.column_config.TextColumn(
                 "Name",
@@ -523,9 +709,11 @@ def render_candidate_library():
                     format="%.1f",
                 )
             ),
-            "Best Matched Job": st.column_config.TextColumn(
-                "Best Matched Job",
-                width="medium",
+            "Best Matched Job": (
+                st.column_config.TextColumn(
+                    "Best Matched Job",
+                    width="medium",
+                )
             ),
             "Source File": st.column_config.TextColumn(
                 "Source File",
@@ -538,7 +726,10 @@ def render_candidate_library():
     selected_rows = event.selection.rows
 
     if selected_rows:
-        selected_row = display_df.iloc[selected_rows[0]]
+        selected_row = display_df.iloc[
+            selected_rows[0]
+        ]
+
         candidate_id = selected_row["Candidate ID"]
 
         selected_candidate = next(
@@ -552,4 +743,6 @@ def render_candidate_library():
         )
 
         if selected_candidate:
-            show_candidate_details(selected_candidate)
+            show_candidate_details(
+                selected_candidate
+            )

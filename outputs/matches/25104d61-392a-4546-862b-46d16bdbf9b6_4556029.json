@@ -1,0 +1,25 @@
+{
+    "candidate_id": "4556029",
+    "job_id": "25104d61-392a-4546-862b-46d16bdbf9b6",
+    "candidate_name": "曹珺",
+    "job_title": "HR Manager",
+    "score": 35.0,
+    "matched_skills": [],
+    "missing_required_skills": [
+        "Bachelor’s degree in Human Resources, Business Administration, or a related field",
+        "3 to 5+ years of HR experience",
+        "Certifications like CHRP or CHRL or SHRM-CP/PHR",
+        "Employee Relations skills",
+        "Talent Management experience",
+        "Communication and Ethics skills",
+        "Proficiency with HRIS software"
+    ],
+    "strengths": [],
+    "concerns": [
+        "Significant mismatch between candidate's background in finance/accounting and the HR management role",
+        "Lack of required HR experience and qualifications",
+        "No relevant certifications for HR field",
+        "Absence of experience in employee relations and talent management"
+    ],
+    "recommendation": "Consider for finance-related positions, but not suitable for HR Manager role."
+}

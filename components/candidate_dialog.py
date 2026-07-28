@@ -4,6 +4,16 @@ import streamlit as st
 from match_loader import load_matches_by_candidate
 from utils.formatters import format_experience_years
 
+from application_loader import (
+    load_applications_by_candidate,
+)
+from application_service import (
+    get_or_create_application,
+    update_application_status,
+)
+from match_loader import load_all_jobs
+from schema import CandidateStatus
+
 
 @st.dialog("Candidate Details", width="large")
 def show_candidate_details(candidate: dict):
@@ -140,3 +150,113 @@ def show_candidate_details(candidate: dict):
                 disabled=True,
                 key=f"dialog_raw_text_{candidate.get('candidate_id')}",
             )
+
+    st.markdown("#### Application Status")
+
+    jobs = load_all_jobs()
+
+    job_options = {
+        (
+            f"{job.get('job_title') or 'Untitled Job'}"
+            + (
+                f" — {job.get('company')}"
+                if job.get("company")
+                else ""
+            )
+        ): job
+        for job in jobs
+    }
+
+    if not job_options:
+        st.info("No jobs are available.")
+    else:
+        selected_job_label = st.selectbox(
+            "Select job",
+            list(job_options.keys()),
+            key=f"status_job_{candidate.get('candidate_id')}",
+        )
+
+        selected_job = job_options[selected_job_label]
+
+        application = get_or_create_application(
+            candidate_id=candidate.get("candidate_id"),
+            job_id=selected_job.get("job_id"),
+        )
+
+        status_values = [
+            status.value
+            for status in CandidateStatus
+        ]
+
+        current_index = status_values.index(
+            application.status.value
+        )
+
+        selected_status = st.selectbox(
+            "Candidate status",
+            options=status_values,
+            index=current_index,
+            key=(
+                f"status_value_"
+                f"{candidate.get('candidate_id')}_"
+                f"{selected_job.get('job_id')}"
+            ),
+        )
+
+        status_note = st.text_input(
+            "Status note",
+            key=(
+                f"status_note_"
+                f"{candidate.get('candidate_id')}_"
+                f"{selected_job.get('job_id')}"
+            ),
+        )
+
+        if st.button(
+            "Update Status",
+            key=(
+                f"update_status_"
+                f"{candidate.get('candidate_id')}_"
+                f"{selected_job.get('job_id')}"
+            ),
+        ):
+            update_application_status(
+                candidate_id=candidate.get("candidate_id"),
+                job_id=selected_job.get("job_id"),
+                new_status=CandidateStatus(selected_status),
+                note=status_note,
+            )
+
+            st.session_state["status_update_success"] = {
+                "candidate_id": candidate.get("candidate_id"),
+                "job_id": selected_job.get("job_id"),
+                "status": selected_status,
+            }
+
+            st.rerun()
+
+        # -----------------------------------------------------------
+        success_info = st.session_state.get("status_update_success")
+
+        if (
+            success_info
+            and success_info.get("candidate_id")
+            == candidate.get("candidate_id")
+            and success_info.get("job_id")
+            == selected_job.get("job_id")
+        ):
+            st.success(
+                f"The candidate status was updated to "
+                f"**{success_info.get('status').title()}**."
+            )
+
+            if st.button(
+                "OK",
+                key=(
+                    f"close_status_message_"
+                    f"{candidate.get('candidate_id')}_"
+                    f"{selected_job.get('job_id')}"
+                ),
+            ):
+                del st.session_state["status_update_success"]
+                st.rerun()
