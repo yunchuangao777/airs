@@ -1,0 +1,223 @@
+{
+  "question_set_id": "a3f84989-bf89-4e92-84c6-a38d8d1ee482",
+  "package_id": "b95249f8-3a0b-4451-8738-a7a8d4d39b50",
+  "candidate_id": "13996438",
+  "job_id": "8fe7c852-fc41-4ab1-a45d-db522f9a9b41",
+  "application_id": "ceb11cd7-9e15-49d3-92f3-9830763aa03b",
+  "candidate_name": "张佳骏",
+  "job_title": "Accounting Manager",
+  "questions": [
+    {
+      "question_id": "Q1",
+      "source": "ai",
+      "original_question": "Can you describe your experience managing fixed assets at L'Oréal? What specific metrics or reports did you use?",
+      "edited_question": "Can you describe your experience managing fixed assets at L'Oréal? What specific metrics or reports did you use?",
+      "selected": false,
+      "category": "experience",
+      "competency": "Relevant Experience",
+      "reason": "This question evaluates the candidate’s direct experience in managing fixed assets, which is related to the job responsibilities.",
+      "strong_answer_indicators": [
+        "Specific metrics used for fixed asset management",
+        "Examples of reports generated",
+        "Understanding of asset lifecycle"
+      ],
+      "warning_signs": [
+        "Vague responses without examples",
+        "Lack of familiarity with management metrics"
+      ],
+      "suggested_follow_ups": [
+        "How did you ensure accuracy in your reports?",
+        "What challenges did you face in managing fixed assets?"
+      ],
+      "created_time": "2026-07-28T21:13:26+00:00",
+      "updated_time": "2026-07-28T21:20:40+00:00"
+    },
+    {
+      "question_id": "Q2",
+      "source": "ai",
+      "original_question": "What has been your involvement in preparing financial statements at your past jobs?",
+      "edited_question": "What has been your involvement in preparing financial statements at your past jobs?",
+      "selected": true,
+      "category": "experience",
+      "competency": "Relevant Experience",
+      "reason": "Understanding the candidate's experience with financial statements is crucial for the Accounting Manager role.",
+      "strong_answer_indicators": [
+        "Detailed explanation of the statement preparation process",
+        "Mention of collaboration with other departments",
+        "Understanding of timelines and deadlines"
+      ],
+      "warning_signs": [
+        "Inability to explain the process",
+        "Limited understanding of financial statement components"
+      ],
+      "suggested_follow_ups": [
+        "What challenges did you encounter when preparing statements?",
+        "How did you ensure compliance?"
+      ],
+      "created_time": "2026-07-28T21:13:26+00:00",
+      "updated_time": "2026-07-28T21:20:40+00:00"
+    },
+    {
+      "question_id": "Q3",
+      "source": "ai",
+      "original_question": "Can you explain the importance of GAAP in accounting and give an example of how you have applied it?",
+      "edited_question": "Can you explain the importance of GAAP in accounting and give an example of how you have applied it?",
+      "selected": true,
+      "category": "technical",
+      "competency": "Technical Skills",
+      "reason": "This assesses the candidate’s technical knowledge relevant to compliance and reporting.",
+      "strong_answer_indicators": [
+        "Clear understanding of GAAP",
+        "Specific example of application in past work"
+      ],
+      "warning_signs": [
+        "Lack of clear understanding of GAAP",
+        "Inability to provide an example"
+      ],
+      "suggested_follow_ups": [
+        "How do you keep updated with changes in GAAP?",
+        "Can you discuss a time when you had to address a GAAP compliance issue?"
+      ],
+      "created_time": "2026-07-28T21:13:26+00:00",
+      "updated_time": "2026-07-28T21:20:40+00:00"
+    },
+    {
+      "question_id": "Q4",
+      "source": "ai",
+      "original_question": "What accounting software or ERP systems are you familiar with, and how have you used them?",
+      "edited_question": "What accounting software or ERP systems are you familiar with, and how have you used them?",
+      "selected": true,
+      "category": "technical",
+      "competency": "Technical Skills",
+      "reason": "This evaluates technical skills and adaptability to the systems used by the company.",
+      "strong_answer_indicators": [
+        "Specific systems mentioned",
+        "Examples of tasks performed using these systems"
+      ],
+      "warning_signs": [
+        "Only mentions basic tasks or tools",
+        "Limited experience with relevant software"
+      ],
+      "suggested_follow_ups": [
+        "What do you see as the major advantages of the systems you have used?",
+        "Have you implemented any improvements in the software usage?"
+      ],
+      "created_time": "2026-07-28T21:13:26+00:00",
+      "updated_time": "2026-07-28T21:20:40+00:00"
+    },
+    {
+      "question_id": "Q5",
+      "source": "ai",
+      "original_question": "Describe a complex accounting problem you faced and how you resolved it. What was the outcome?",
+      "edited_question": "Describe a complex accounting problem you faced and how you resolved it. What was the outcome?",
+      "selected": true,
+      "category": "problem_solving",
+      "competency": "Problem Solving",
+      "reason": "This assesses the candidate's analytical and problem-solving skills.",
+      "strong_answer_indicators": [
+        "Clear explanation of the problem",
+        "Logical steps taken to resolve it",
+        "Positive outcome identified"
+      ],
+      "warning_signs": [
+        "Inability to articulate a specific problem",
+        "Describes minor or insignificant issues"
+      ],
+      "suggested_follow_ups": [
+        "What would you do differently in hindsight?",
+        "Was there a team involved in the resolution?"
+      ],
+      "created_time": "2026-07-28T21:13:26+00:00",
+      "updated_time": "2026-07-28T21:20:40+00:00"
+    },
+    {
+      "question_id": "Q6",
+      "source": "ai",
+      "original_question": "Have you ever led a project or a team? What was your approach to leadership?",
+      "edited_question": "Have you ever led a project or a team? What was your approach to leadership?",
+      "selected": true,
+      "category": "leadership",
+      "competency": "Leadership",
+      "reason": "This evaluates the candidate’s potential for managerial responsibilities.",
+      "strong_answer_indicators": [
+        "Specific leadership roles described",
+        "Discussion of mentoring or training team members"
+      ],
+      "warning_signs": [
+        "Limited or no examples of leadership",
+        "Avoids taking responsibility"
+      ],
+      "suggested_follow_ups": [
+        "What challenges did you face as a leader?",
+        "How did you adapt your leadership style based on team needs?"
+      ],
+      "created_time": "2026-07-28T21:13:26+00:00",
+      "updated_time": "2026-07-28T21:20:40+00:00"
+    },
+    {
+      "question_id": "Q7",
+      "source": "ai",
+      "original_question": "How do you communicate complex accounting information to non-financial stakeholders?",
+      "edited_question": "How do you communicate complex accounting information to non-financial stakeholders?",
+      "selected": true,
+      "category": "behavioral",
+      "competency": "Communication",
+      "reason": "Evaluating the ability to effectively share information is crucial for an Accounting Manager.",
+      "strong_answer_indicators": [
+        "Examples of tailoring communication to the audience",
+        "Techniques for simplifying information"
+      ],
+      "warning_signs": [
+        "Reluctance to explain concepts",
+        "Overly technical explanations without clarity"
+      ],
+      "suggested_follow_ups": [
+        "Can you provide an example of when this was especially challenging?",
+        "How do you seek feedback on your communication style?"
+      ],
+      "created_time": "2026-07-28T21:13:26+00:00",
+      "updated_time": "2026-07-28T21:20:40+00:00"
+    },
+    {
+      "question_id": "Q8",
+      "source": "ai",
+      "original_question": "Why do you want to join our organization, and what excites you about this position?",
+      "edited_question": "Why do you want to join our organization, and what excites you about this position?",
+      "selected": true,
+      "category": "closing",
+      "competency": "Motivation",
+      "reason": "Understanding motivation helps assess fit with company culture and role expectations.",
+      "strong_answer_indicators": [
+        "Specific reference to the company’s values or projects",
+        "Alignment of personal goals with the job role"
+      ],
+      "warning_signs": [
+        "Generic responses unrelated to the company",
+        "Unclear career goals"
+      ],
+      "suggested_follow_ups": [
+        "What are your career aspirations in the next few years?",
+        "How do you see this position advancing your career?"
+      ],
+      "created_time": "2026-07-28T21:13:26+00:00",
+      "updated_time": "2026-07-28T21:20:40+00:00"
+    },
+    {
+      "question_id": "CUSTOM-1",
+      "source": "recruiter",
+      "original_question": "",
+      "edited_question": "What would your priorities be during your first 90 days in this role?",
+      "selected": true,
+      "category": "closing",
+      "competency": "Role Planning",
+      "reason": "Assess the candidate's understanding of the role and ability to prioritize.",
+      "strong_answer_indicators": [],
+      "warning_signs": [],
+      "suggested_follow_ups": [],
+      "created_time": "2026-07-28T21:13:26+00:00",
+      "updated_time": "2026-07-28T21:20:40+00:00"
+    }
+  ],
+  "created_time": "2026-07-28T21:13:26+00:00",
+  "updated_time": "2026-07-28T21:20:40+00:00"
+}

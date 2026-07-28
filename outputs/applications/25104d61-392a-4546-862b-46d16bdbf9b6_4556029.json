@@ -1,0 +1,21 @@
+{
+    "application_id": "d643b74b-157b-4f7e-96b2-9f763a749e3d",
+    "candidate_id": "4556029",
+    "job_id": "25104d61-392a-4546-862b-46d16bdbf9b6",
+    "status": "interview",
+    "created_time": "2026-07-28T15:04:13",
+    "updated_time": "2026-07-28T15:04:22",
+    "notes": null,
+    "status_history": [
+        {
+            "status": "none",
+            "changed_time": "2026-07-28T15:04:13",
+            "note": "Application record created"
+        },
+        {
+            "status": "interview",
+            "changed_time": "2026-07-28T15:04:22",
+            "note": null
+        }
+    ]
+}

@@ -1,184 +1,342 @@
+from __future__ import annotations
+
 import streamlit as st
 
-from interview_prep import generate_interview_prep
-from interview_saver import save_interview_prep
-from match_loader import (
-    get_ranked_matches_by_job,
-    load_all_jobs,
-    load_candidate_by_id,
+from components.interview.interview_settings import (
+    render_interview_settings,
+)
+from services.hiring_service import (
+    build_hiring_dataset,
+)
+from services.interview_service import (
+    build_interview_context,
+    get_interview_candidates_for_job,
+    get_interview_jobs,
+)
+from components.interview.interview_package_renderer import (
+    render_interview_package,
+)
+from services.interview_package_service import (
+    generate_interview_package,
+    load_interview_package,
+)
+from components.interview.interview_questions import (
+    render_interview_questions,
+)
+from components.interview.interview_question_editor import (
+    render_interview_question_editor,
+)
+from components.interview.interview_evaluation_template import (
+    render_interview_evaluation_template,
 )
 
+def create_job_label(job: dict) -> str:
+    """
+    Create a readable job label for the selector.
+    """
+    job_title = (
+        job.get("job_title")
+        or "Untitled Job"
+    )
 
-def render_interview_prep():
+    company = job.get("company") or ""
 
-    # st.header("Interview Prep")
+    if company:
+        return f"{job_title} — {company}"
 
-    jobs = load_all_jobs()
+    return job_title
 
-    if not jobs:
-        st.warning(
-            "No jobs found. Please create a job description first."
+
+def create_candidate_label(
+    candidate_row: dict,
+) -> str:
+    """
+    Create a readable candidate label for the selector.
+    """
+    candidate_name = (
+        candidate_row.get("candidate_name")
+        or "Unknown Candidate"
+    )
+
+    status = (
+        candidate_row.get("status")
+        or "none"
+    ).title()
+
+    score = float(
+        candidate_row.get("match_score", 0)
+        or 0
+    )
+
+    return (
+        f"{candidate_name} | "
+        f"{status} | Score: {score:.1f}"
+    )
+
+
+def render_interview_prep() -> None:
+    """
+    Render the Interview Prep page.
+    """
+    package_message = st.session_state.pop(
+    "interview_package_message",
+    None,
+    )
+
+    if package_message:
+        st.success(package_message)
+        
+    dataset = build_hiring_dataset()
+
+    interview_jobs = get_interview_jobs(
+        dataset
+    )
+
+    if not interview_jobs:
+        st.info(
+            "No candidates are currently eligible "
+            "for interview preparation."
         )
         return
 
-    job_options = {
-        (
-            f"{job.get('job_title', 'Untitled Job')} | "
-            f"{job.get('company', '')} | "
-            f"{job.get('job_id', '')}"
-        ): job
-        for job in jobs
-    }
+    # =========================================================
+    # Job selection
+    # =========================================================
+    job_options: dict[str, dict] = {}
+
+    for job in interview_jobs:
+        label = create_job_label(job)
+
+        # Protect against duplicate labels.
+        if label in job_options:
+            label = (
+                f"{label} "
+                f"({job.get('job_id')})"
+            )
+
+        job_options[label] = job
 
     selected_job_label = st.selectbox(
         "Select job",
-        list(job_options.keys()),
-        key="interview_job_select",
+        options=list(job_options.keys()),
+        key="interview_prep_job",
     )
 
-    selected_job = job_options[selected_job_label]
-    job_id = selected_job.get("job_id")
-
-    min_score = st.slider(
-        "Minimum match score",
-        min_value=0,
-        max_value=100,
-        value=70,
-        step=5,
-    )
-
-    matches = get_ranked_matches_by_job(
-        job_id=job_id,
-        min_score=min_score,
-    )
-
-    if not matches:
-        st.warning(
-            "No matching results found for this job. "
-            "Please run Job Matching first."
-        )
-        return
-
-    st.subheader("Matched Candidates")
-
-    match_rows = [
-        {
-            "candidate_name": match.get("candidate_name"),
-            "score": match.get("score"),
-            "recommendation": match.get("recommendation"),
-            "matched_skills": ", ".join(
-                match.get("matched_skills", [])
-            ),
-            "missing_required_skills": ", ".join(
-                match.get("missing_required_skills", [])
-            ),
-            "candidate_id": match.get("candidate_id"),
-        }
-        for match in matches
+    selected_job = job_options[
+        selected_job_label
     ]
 
-    st.dataframe(match_rows, use_container_width=True)
-
-    match_options = {
-        (
-            f"{match.get('candidate_name', 'Unknown')} | "
-            f"Score: {match.get('score')} | "
-            f"{match.get('candidate_id')}"
-        ): match
-        for match in matches
-    }
-
-    selected_match_label = st.selectbox(
-        "Select candidate for interview prep",
-        list(match_options.keys()),
-        key="interview_match_select",
+    selected_job_id = selected_job.get(
+        "job_id"
     )
 
-    selected_match = match_options[selected_match_label]
-    candidate = load_candidate_by_id(
-        selected_match.get("candidate_id")
-    )
-
-    if candidate is None:
-        st.error("Candidate JSON not found for the selected match.")
+    if not selected_job_id:
+        st.error(
+            "The selected job does not have a valid job ID."
+        )
         return
 
-    col1, col2, col3 = st.columns(3)
+    # =========================================================
+    # Candidate selection
+    # =========================================================
+    candidate_rows = (
+        get_interview_candidates_for_job(
+            job_id=selected_job_id,
+            dataset=dataset,
+        )
+    )
 
-    with col1:
-        st.subheader("Candidate")
-        st.json(
-            {
-                "candidate_id": candidate.get("candidate_id"),
-                "name": candidate.get("name"),
-                "email": candidate.get("email"),
-                "skills": candidate.get("skills"),
-                "total_years_experience": candidate.get(
-                    "total_years_experience"
-                ),
-            }
+    if not candidate_rows:
+        st.info(
+            "No eligible candidates are available "
+            "for this job."
+        )
+        return
+
+    candidate_options: dict[str, dict] = {}
+
+    for candidate_row in candidate_rows:
+        label = create_candidate_label(
+            candidate_row
         )
 
-    with col2:
-        st.subheader("Job")
-        st.json(
-            {
-                "job_id": selected_job.get("job_id"),
-                "job_title": selected_job.get("job_title"),
-                "company": selected_job.get("company"),
-                "required_skills": selected_job.get(
-                    "required_skills"
-                ),
-                "preferred_skills": selected_job.get(
-                    "preferred_skills"
-                ),
-            }
-        )
-
-    with col3:
-        st.subheader("Match Result")
-        st.json(
-            {
-                "score": selected_match.get("score"),
-                "matched_skills": selected_match.get(
-                    "matched_skills"
-                ),
-                "missing_required_skills": selected_match.get(
-                    "missing_required_skills"
-                ),
-                "strengths": selected_match.get("strengths"),
-                "concerns": selected_match.get("concerns"),
-                "recommendation": selected_match.get(
-                    "recommendation"
-                ),
-            }
-        )
-
-    if st.button("Generate Interview Prep"):
-        with st.spinner("Generating interview prep..."):
-            prep = generate_interview_prep(
-                candidate=candidate,
-                job=selected_job,
-                match_result=selected_match,
+        # Protect against duplicate names and scores.
+        if label in candidate_options:
+            label = (
+                f"{label} "
+                f"({candidate_row.get('candidate_id')})"
             )
-            path = save_interview_prep(prep)
 
-        st.success(f"Interview prep saved: {path}")
+        candidate_options[label] = candidate_row
 
-        st.subheader("Candidate Summary")
-        st.write(prep.candidate_summary)
+    selected_candidate_label = st.selectbox(
+        "Select candidate",
+        options=list(candidate_options.keys()),
+        key="interview_prep_candidate",
+    )
 
-        st.subheader("Role-Fit Summary")
-        st.write(prep.role_fit_summary)
+    selected_candidate = candidate_options[
+        selected_candidate_label
+    ]
 
-        st.subheader("Key Strengths")
-        for item in prep.key_strengths:
-            st.write(f"- {item}")
+    selected_candidate_id = (
+        selected_candidate.get("candidate_id")
+    )
 
-        st.subheader("Key Concerns")
-        for item in prep.key_concerns:
-            st.write(f"- {item}")
+    if not selected_candidate_id:
+        st.error(
+            "The selected candidate does not have "
+            "a valid candidate ID."
+        )
+        return
 
-        st.subheader("Interview Focus Areas")
-        for item in prep.interview_focus_areas:
-            st.write(f"- {item}")
+    # =========================================================
+    # Build interview context
+    # =========================================================
+    context = build_interview_context(
+        candidate_id=selected_candidate_id,
+        job_id=selected_job_id,
+        dataset=dataset,
+    )
+
+    if not context:
+        st.error(
+            "Unable to build the interview context."
+        )
+        return
+
+    # =========================================================
+    # Interview Prep workspace
+    # =========================================================
+    (
+        overview_tab,
+        preparation_tab,
+        questions_tab,
+        evaluation_tab,
+    ) = st.tabs(
+        [
+            "Overview",
+            "Preparation",
+            "Questions",
+            "Evaluation",
+        ]
+    )
+
+    # ---------------------------------------------------------
+    # Overview
+    # ---------------------------------------------------------
+    with overview_tab:
+
+        package = load_interview_package(
+            candidate_id=context["candidate_id"],
+            job_id=context["job_id"],
+        )
+
+        if package is None:
+
+            st.info(
+                "Generate an interview package first."
+            )
+
+        else:
+
+            render_interview_package(package)
+
+        # st.caption(
+            # "This temporary JSON view confirms that "
+            # "candidate, job, application, and matching "
+            # "information are loaded correctly."
+        # )
+
+        # st.json(context)
+
+    # ---------------------------------------------------------
+    # Preparation
+    # ---------------------------------------------------------
+    package = load_interview_package(
+    candidate_id=context["candidate_id"],
+    job_id=context["job_id"],
+    )
+    
+    with preparation_tab:
+        if package is not None:
+            with st.container(border=True):
+                st.markdown("### Existing Interview Package")
+
+                info_col1, info_col2, info_col3 = st.columns(3)
+
+                with info_col1:
+                    st.caption("Created")
+                    st.write(package.created_time)
+
+                with info_col2:
+                    st.caption("Last Updated")
+                    st.write(package.updated_time)
+
+                with info_col3:
+                    st.caption("Model")
+                    st.write(package.model_name)
+
+                st.caption(
+                    "Change the settings below and generate again "
+                    "to replace the current package."
+                )
+
+        generated_settings = render_interview_settings(
+            context=context,
+            package_exists=package is not None,
+        )
+
+        if generated_settings:
+            with st.spinner(
+                "Generating the interview package..."
+            ):
+                try:
+                    package = generate_interview_package(
+                        context=context,
+                        settings=generated_settings,
+                        overwrite=True,
+                    )
+
+                    st.session_state[
+                        "interview_package_message"
+                    ] = (
+                        f"Interview package for "
+                        f"{package.candidate_name} was generated "
+                        f"successfully."
+                    )
+
+                    st.rerun()
+
+                except Exception as exc:
+                    st.error(
+                        f"Unable to generate interview package: {exc}"
+                    )
+
+    # ---------------------------------------------------------
+    # Questions
+    # ---------------------------------------------------------
+    with questions_tab:
+        if package is None:
+            st.info(
+                "Generate an interview package in the "
+                "Preparation tab first."
+            )
+        else:
+            render_interview_question_editor(
+                package
+            )
+
+    # ---------------------------------------------------------
+    # Evaluation
+    # ---------------------------------------------------------
+    with evaluation_tab:
+        if package is None:
+            st.info(
+                "Generate an interview package in the "
+                "Preparation tab first."
+            )
+        else:
+            render_interview_evaluation_template(
+                package
+            )
