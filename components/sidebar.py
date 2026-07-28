@@ -14,12 +14,15 @@ def render_nav_button(
     )
 
     is_selected = current_page == page_name
-    square = "🟩" if is_selected else "⬜"
+
+    icon = "🟩" if is_selected else "⬜"
 
     if st.sidebar.button(
-        f"{square}  {display_name}",
+        display_name,
         key=f"nav_{page_name}",
         use_container_width=True,
+        type="tertiary",
+        icon=icon,
     ):
         if not is_selected:
             st.session_state["current_page"] = page_name

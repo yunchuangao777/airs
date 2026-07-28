@@ -36,20 +36,20 @@ def show_create_job_dialog():
     input_method = st.radio(
         "Input method",
         [
-            "Paste text",
+            "AI Generate",
             "Upload file",
-            "Fill in fields",
+            "Manual Fill",
         ],
         horizontal=True,
         key="create_job_input_method",
     )
 
     # =========================================================
-    # Method 1: Paste text
+    # Method 1: AI Generate
     # =========================================================
-    if input_method == "Paste text":
+    if input_method == "AI Generate":
         job_text = st.text_area(
-            "Paste job description",
+            "AI generates job using the description",
             height=350,
             placeholder="Paste the complete job description here...",
             key="create_job_text",
@@ -158,7 +158,7 @@ def show_create_job_dialog():
                 st.error(f"Unable to create job: {exc}")
 
     # =========================================================
-    # Method 3: Fill in fields
+    # Method 3: Manual Fill
     # =========================================================
     else:
         st.caption(

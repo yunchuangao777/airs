@@ -8,10 +8,9 @@ from traditional_matcher import match_candidate_traditional
 
 
 def render_traditional_matching(candidates: list[dict], selected_job: dict) -> None:
-    st.markdown("### Traditional Matching")
+    st.markdown("### Rule Matching")
     st.caption(
-        "Traditional Matching uses fixed criteria and weights. "
-        "It does not call the OpenAI API."
+        "Rule-basedl Matching uses fixed criteria and weights. "
     )
 
     job_id = selected_job.get("job_id")
@@ -77,7 +76,7 @@ def render_traditional_matching(candidates: list[dict], selected_job: dict) -> N
         )
 
     if st.button(
-        "Run Traditional Matching",
+        "Run Rule Matching",
         type="primary",
         disabled=total_weight == 0,
         key=f"run_traditional_matching_{job_id}",

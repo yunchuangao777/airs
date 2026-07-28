@@ -430,10 +430,10 @@ def render_job_overview(
     """
     st.markdown("### Job Overview")
 
-    st.caption(
-        "Review candidate counts and hiring progress "
-        "for each job."
-    )
+    # st.caption(
+        # "Review candidate counts and hiring progress "
+        # "for each job."
+    # )
 
     if not summaries:
         st.info(
@@ -545,10 +545,10 @@ def render_job_overview(
             > 0
         ]
 
-    st.caption(
-        f"Showing {len(filtered_summaries)} "
-        f"of {len(summaries)} job(s)."
-    )
+    # st.caption(
+        # f"Showing {len(filtered_summaries)} "
+        # f"of {len(summaries)} job(s)."
+    # )
 
     if not filtered_summaries:
         st.info(

@@ -178,11 +178,11 @@ def render_candidate_management(
     """
     st.markdown("### Candidate Management")
 
-    st.caption(
-        "Select a job, filter its candidate pipeline, "
-        "and open a candidate to review details or "
-        "change hiring status."
-    )
+    # st.caption(
+        # "Select a job, filter its candidate pipeline, "
+        # "and open a candidate to review details or "
+        # "change hiring status."
+    # )
 
     if not summaries:
         st.info("No jobs are available.")
@@ -330,11 +330,14 @@ def render_candidate_management(
             >= minimum_score
         ]
 
-    st.caption(
-        f"Showing {len(application_rows)} of "
-        f"{len(all_job_rows)} candidate(s) for "
-        f"{selected_job_label}."
-    )
+    # st.caption(
+        # f"Showing {len(application_rows)} of "
+        # f"{len(all_job_rows)} candidate(s) for "
+        # f"{selected_job_label}."
+    # )
+
+
+    st.divider()
 
     if not all_job_rows:
         st.info(

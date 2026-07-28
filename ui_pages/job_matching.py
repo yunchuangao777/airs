@@ -30,7 +30,7 @@ def render_job_matching() -> None:
     display_selected_job(selected_job)
     st.divider()
 
-    ai_tab, traditional_tab = st.tabs(["AI Matching", "Traditional Matching"])
+    ai_tab, traditional_tab = st.tabs(["AI Matching", "Rule Matching"])
 
     with ai_tab:
         render_ai_matching(candidates, selected_job)

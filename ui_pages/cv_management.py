@@ -23,13 +23,13 @@ def render_cv_management() -> None:
 
     with action_col:
         if st.button(
-            "＋ Create New Candidate",
+            "＋ Add",
             type="primary",
             use_container_width=True,
             key="open_create_candidate_dialog",
         ):
             show_create_candidate_dialog()
 
-    st.divider()
+    # st.divider()
 
     render_candidate_library()

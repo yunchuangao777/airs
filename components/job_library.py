@@ -103,10 +103,10 @@ def render_job_library(search_text: str = ""):
 
         filtered_df = filtered_df[mask]
 
-    st.caption(
-        f"Showing {len(filtered_df)} of "
-        f"{len(job_df)} jobs."
-    )
+    # st.caption(
+        # f"Showing {len(filtered_df)} of "
+        # f"{len(job_df)} jobs."
+    # )
 
     display_df = filtered_df.drop(
         columns=[

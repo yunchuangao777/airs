@@ -169,7 +169,8 @@ def render_candidate_library() -> None:
     st.markdown("### 🔍 Search")
 
     keyword = st.text_input(
-        "Search candidates",
+        # "Search candidates",
+        "",
         placeholder=(
             "Search name, email, skill, school, "
             "location, job, or source file..."
@@ -345,7 +346,7 @@ def render_candidate_library() -> None:
 
     with clear_col:
         if st.button(
-            "Clear Filters",
+            "Reset",
             use_container_width=True,
             key="candidate_clear_filters",
         ):
@@ -541,10 +542,10 @@ def render_candidate_library() -> None:
             match_scores >= min_match_score
         ]
 
-    st.caption(
-        f"Showing {len(filtered_df)} of "
-        f"{len(candidate_df)} candidates."
-    )
+    # st.caption(
+        # f"Showing {len(filtered_df)} of "
+        # f"{len(candidate_df)} candidates."
+    # )
 
     # =========================================================
     # Export
@@ -576,7 +577,7 @@ def render_candidate_library() -> None:
         ).encode("utf-8-sig")
 
         st.download_button(
-            label="Download CSV",
+            label="Export CSV",
             data=csv_data,
             file_name="candidates_filtered.csv",
             mime="text/csv",
@@ -623,7 +624,7 @@ def render_candidate_library() -> None:
         )
 
         st.download_button(
-            label="Download PDF",
+            label="Export PDF",
             data=pdf_data,
             file_name="candidate_report.pdf",
             mime="application/pdf",

@@ -77,11 +77,38 @@ def render_page(page: str) -> None:
 
 
 def main() -> None:
+
     st.set_page_config(
         page_title="In-Recruit",
         page_icon="IR",
         layout="wide",
         initial_sidebar_state="expanded",
+    )
+
+    st.markdown(
+        """
+        <style>
+        section[data-testid="stSidebar"]
+        button[data-testid="stBaseButton-tertiary"],
+
+        section[data-testid="stSidebar"]
+        button[data-testid="baseButton-tertiary"] {
+            justify-content: flex-start !important;
+            text-align: left !important;
+            padding-left: 0.75rem !important;
+        }
+
+        section[data-testid="stSidebar"]
+        button[data-testid="stBaseButton-tertiary"] p,
+
+        section[data-testid="stSidebar"]
+        button[data-testid="baseButton-tertiary"] p {
+            width: 100% !important;
+            text-align: left !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
     )
 
     page = render_sidebar()
