@@ -92,6 +92,39 @@ def build_candidate_table(
                     status,
                     status.title(),
                 ),
+
+                "Interview": (
+                    application.get("interview_status", "")
+                    .replace("_", " ")
+                    .title()
+                ),
+
+                "Evaluation": (
+                    application.get("evaluation_status", "")
+                    .replace("_", " ")
+                    .title()
+                ),
+
+                "Score": (
+                    round(
+                        application.get(
+                            "evaluation_score"
+                        ),
+                        2,
+                    )
+                    if application.get(
+                        "evaluation_score"
+                    )
+                    is not None
+                    else ""
+                ),
+
+                "Recommendation": (
+                    application.get(
+                        "evaluation_recommendation",
+                        "",
+                    )
+                ),                
                 "Match Score": float(
                     application.get(
                         "match_score",
@@ -125,6 +158,19 @@ def build_candidate_table(
                     "job_id"
                 ),
                 "_Application Row": application,
+
+                "Round": (
+                    application.get(
+                        "interview_round"
+                    )
+                ),
+
+                "Stage": (
+                    application.get(
+                        "interview_stage"
+                    )
+                ),
+
             }
         )
 

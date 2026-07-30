@@ -212,13 +212,13 @@ def render_interview_prep() -> None:
         overview_tab,
         preparation_tab,
         questions_tab,
-        evaluation_tab,
+        scorecard_tab,
     ) = st.tabs(
         [
             "Overview",
             "Preparation",
             "Questions",
-            "Evaluation",
+            "Scorecard",
         ]
     )
 
@@ -330,7 +330,7 @@ def render_interview_prep() -> None:
     # ---------------------------------------------------------
     # Evaluation
     # ---------------------------------------------------------
-    with evaluation_tab:
+    with scorecard_tab:
         if package is None:
             st.info(
                 "Generate an interview package in the "

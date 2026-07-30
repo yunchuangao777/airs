@@ -7,7 +7,9 @@ from application_service import (
 )
 from schema import CandidateStatus
 from services.hiring_service import STATUS_LABELS
-
+from components.hiring.candidate_timeline import (
+    render_candidate_timeline,
+)
 
 EDITABLE_STATUSES = [
     CandidateStatus.APPLIED,
@@ -300,11 +302,11 @@ def show_candidate_status_dialog(
 
     st.caption(f"Application for: {job_label}")
 
-    details_tab, status_tab, history_tab = st.tabs(
+    details_tab, status_tab, timeline_tab = st.tabs(
         [
             "Candidate Details",
             "Update Status",
-            "Status History",
+            "Timeline",
         ]
     )
 
@@ -432,7 +434,7 @@ def show_candidate_status_dialog(
                     f"Unable to update status: {exc}"
                 )
 
-    with history_tab:
-        render_status_history(
+    with timeline_tab:
+        render_candidate_timeline(
             application_row
         )

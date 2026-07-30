@@ -8,6 +8,10 @@ from ui_pages.interview_prep_page import render_interview_prep
 from ui_pages.hiring_management import (
     render_hiring_management,
 )
+from ui_pages.interview_session_page import (
+    render_interview_session_page,
+)
+from ui_pages.ai_interview_page import render_ai_interview_page
 
 DEFAULT_PAGE = "CV Management"
 
@@ -49,7 +53,17 @@ def render_sidebar() -> str:
         display_name="Interview Prep",
         page_name="Interview Prep",
     )
-    
+
+    render_nav_button(
+        display_name="Interview Session",
+        page_name="Interview Session",
+    )
+
+    render_nav_button(
+        display_name="AI Interview",
+        page_name="AI Interview",
+    )
+
     return st.session_state["current_page"]
 
 
@@ -70,6 +84,12 @@ def render_page(page: str) -> None:
 
     elif page == "Interview Prep":
         render_interview_prep()
+
+    elif page == "Interview Session":
+        render_interview_session_page()
+
+    elif page == "AI Interview":
+        render_ai_interview_page()
 
     else:
         st.error(f"Unknown page: {page}")

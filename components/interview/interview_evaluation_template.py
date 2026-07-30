@@ -384,12 +384,11 @@ def render_interview_evaluation_template(
         package
     )
 
-    st.markdown("## Evaluation Template")
+    st.markdown("## Interview Scorecard")
 
     st.caption(
-        "Define the scorecard that will be used after "
-        "the interview. Candidate ratings and comments "
-        "will be recorded later in the Interview Session."
+        "Define the competencies, weights, and scoring guidance "
+        "that interviewers will use after the interview."
     )
 
     render_template_summary(template)

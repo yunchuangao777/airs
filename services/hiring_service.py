@@ -6,7 +6,10 @@ from match_loader import (
     load_all_jobs,
     load_all_matches,
 )
-
+from services.interview_session_service import (
+    calculate_weighted_evaluation_score,
+    load_all_interview_sessions,
+)
 
 STATUS_ORDER = [
     "none",
@@ -79,6 +82,31 @@ def _get_best_matches(
 
     return best_matches
 
+def _get_latest_interview_sessions() -> dict:
+    """
+    Return the newest interview session for each
+    candidate/job pair.
+    """
+    sessions = load_all_interview_sessions()
+
+    latest: dict[tuple[str, str], object] = {}
+
+    for session in sessions:
+        key = (
+            session.candidate_id,
+            session.job_id,
+        )
+
+        existing = latest.get(key)
+
+        if existing is None:
+            latest[key] = session
+            continue
+
+        if session.updated_time > existing.updated_time:
+            latest[key] = session
+
+    return latest
 
 def build_hiring_dataset() -> list[dict]:
     """
@@ -103,11 +131,29 @@ def build_hiring_dataset() -> list[dict]:
 
     best_matches = _get_best_matches(matches)
 
+    # Build this once before the loop.
+    latest_sessions = _get_latest_interview_sessions()
+
     rows: list[dict] = []
 
     for application in applications:
         candidate_id = application.get("candidate_id")
         job_id = application.get("job_id")
+
+        # This must come after candidate_id and job_id
+        # have been assigned.
+        session = latest_sessions.get(
+            (candidate_id, job_id)
+        )
+
+        if session is not None:
+            weighted_score = (
+                calculate_weighted_evaluation_score(
+                    session
+                )
+            )
+        else:
+            weighted_score = None
 
         candidate = candidates_by_id.get(
             candidate_id,
@@ -170,10 +216,45 @@ def build_hiring_dataset() -> list[dict]:
                     "updated_time"
                 ),
                 "notes": application.get("notes") or "",
+
+                # Interview information
+                "interview_round": (
+                    session.interview_round
+                    if session is not None
+                    else None
+                ),
+                "interview_stage": (
+                    session.interview_stage
+                    if session is not None
+                    else ""
+                ),
+                "interview_mode": (
+                    session.interview_mode
+                    if session is not None
+                    else ""
+                ),
+                "interview_status": (
+                    session.status
+                    if session is not None
+                    else ""
+                ),
+                "evaluation_status": (
+                    session.evaluation_status
+                    if session is not None
+                    else ""
+                ),
+                "evaluation_score": weighted_score,
+                "evaluation_recommendation": (
+                    session.recommendation
+                    if session is not None
+                    else ""
+                ),
+
                 "candidate": candidate,
                 "job": job,
                 "match": match,
                 "application": application,
+                "interview_session": session,
             }
         )
 
