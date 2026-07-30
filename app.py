@@ -12,6 +12,9 @@ from ui_pages.interview_session_page import (
     render_interview_session_page,
 )
 from ui_pages.ai_interview_page import render_ai_interview_page
+from ui_pages.public_interview_page import (
+    render_public_interview_page,
+)
 
 DEFAULT_PAGE = "CV Management"
 
@@ -96,7 +99,6 @@ def render_page(page: str) -> None:
 
 
 def main() -> None:
-
     st.set_page_config(
         page_title="In-Recruit",
         page_icon="IR",
@@ -104,6 +106,40 @@ def main() -> None:
         initial_sidebar_state="expanded",
     )
 
+    interview_token = str(
+        st.query_params.get(
+            "interview_token",
+            "",
+        )
+    ).strip()
+
+    # Public candidate interview route.
+    # This check must happen before rendering the recruiter sidebar.
+    if interview_token:
+        st.markdown(
+            """
+            <style>
+            section[data-testid="stSidebar"] {
+                display: none !important;
+            }
+
+            div[data-testid="stSidebarCollapsedControl"] {
+                display: none !important;
+            }
+
+            .block-container {
+                max-width: 900px;
+                padding-top: 2rem;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        render_public_interview_page()
+        return
+
+    # Recruiter application styling and navigation.
     st.markdown(
         """
         <style>
