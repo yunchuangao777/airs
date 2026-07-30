@@ -1,0 +1,31 @@
+{
+    "candidate_id": "13996438",
+    "job_id": "84523473-c460-4da3-a35d-0b7a4f58839a",
+    "candidate_name": "张佳骏",
+    "job_title": "Human Resources (HR) Manager",
+    "match_method": "ai",
+    "score": 25.0,
+    "skill_score": 0.0,
+    "experience_score": 0.0,
+    "education_score": 0.0,
+    "location_score": 0.0,
+    "matched_skills": [],
+    "missing_required_skills": [
+        "HR Management",
+        "Payroll Administration",
+        "Labour Relations",
+        "Disability Management",
+        "Knowledge of HR legislation",
+        "Excellent interpersonal skills",
+        "Excellent oral and written communication skills",
+        "Ability to maintain confidentiality",
+        "Organizational skills"
+    ],
+    "strengths": [],
+    "concerns": [
+        "No relevant HR management experience.",
+        "Lacks required educational qualifications in HR Management.",
+        "Missing key skills related to the HR field."
+    ],
+    "recommendation": "The candidate does not meet the necessary qualifications and experience for the HR Manager position."
+}

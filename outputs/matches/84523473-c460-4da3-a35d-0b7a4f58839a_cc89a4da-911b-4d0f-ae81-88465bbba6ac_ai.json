@@ -1,0 +1,36 @@
+{
+    "candidate_id": "cc89a4da-911b-4d0f-ae81-88465bbba6ac",
+    "job_id": "84523473-c460-4da3-a35d-0b7a4f58839a",
+    "candidate_name": "Wang Xue Ying Melody",
+    "job_title": "Human Resources (HR) Manager",
+    "match_method": "ai",
+    "score": 62.0,
+    "skill_score": 65.0,
+    "experience_score": 60.0,
+    "education_score": 60.0,
+    "location_score": null,
+    "matched_skills": [
+        "HR Management",
+        "Organizational skills",
+        "Excellent interpersonal skills"
+    ],
+    "missing_required_skills": [
+        "Payroll Administration",
+        "Labour Relations",
+        "Disability Management",
+        "Knowledge of HR legislation",
+        "Excellent oral and written communication skills",
+        "Ability to maintain confidentiality"
+    ],
+    "strengths": [
+        "15 years of experience in HR and office management roles.",
+        "Strong organizational skills as demonstrated in previous positions.",
+        "Experience in recruitment and employee onboarding."
+    ],
+    "concerns": [
+        "Lacks direct experience in payroll administration and labour relations which are crucial for the HR Manager role.",
+        "No mention of CHRP designation or specific HR legislation knowledge.",
+        "Position may require advanced oral and written communication skills that need to be evaluated further."
+    ],
+    "recommendation": "Consider for a possible HR role with additional support or training, but may not be suitable for the HR Manager level at this time."
+}

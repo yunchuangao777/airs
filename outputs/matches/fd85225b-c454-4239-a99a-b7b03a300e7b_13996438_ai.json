@@ -1,0 +1,37 @@
+{
+    "candidate_id": "13996438",
+    "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+    "candidate_name": "张佳骏",
+    "job_title": "Finance and Accounting Manager",
+    "match_method": "ai",
+    "score": 65.0,
+    "skill_score": 60.0,
+    "experience_score": 70.0,
+    "education_score": 69.0,
+    "location_score": null,
+    "matched_skills": [
+        "财务管理",
+        "固定资产管理",
+        "增值税申报",
+        "预算控制",
+        "项目会计分析"
+    ],
+    "missing_required_skills": [
+        "Proficiency in Microsoft 365 applications",
+        "Sound knowledge of accounting principles, standards, and regulations",
+        "Proficiency with financial management software",
+        "Superior data management and data analysis skills",
+        "Excellent verbal and written communication skills"
+    ],
+    "strengths": [
+        "Five years of relevant accounting experience, including fixed asset management and budget control",
+        "Experience in large organizations such as 欧莱雅",
+        "Bachelor's degree in a relevant field"
+    ],
+    "concerns": [
+        "Lack of experience with specific financial management software mentioned in the job description",
+        "Missing familiarity with Microsoft 365 applications, which is crucial for the role",
+        "No supervisory experience or CPA certification, which are preferred qualifications"
+    ],
+    "recommendation": "Consider further development in required software skills and additional certifications to enhance candidacy."
+}

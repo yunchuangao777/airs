@@ -1,0 +1,30 @@
+{
+    "candidate_id": "566a5991-1cf0-478d-8689-9b95f80df2a3",
+    "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+    "candidate_name": "张洁",
+    "job_title": "Finance and Accounting Manager",
+    "match_method": "ai",
+    "score": 40.0,
+    "skill_score": 20.0,
+    "experience_score": 50.0,
+    "education_score": 60.0,
+    "location_score": null,
+    "matched_skills": [],
+    "missing_required_skills": [
+        "Proficiency in Microsoft 365 applications (especially Excel)",
+        "Sound knowledge of accounting principles, standards, and regulations",
+        "Proficiency and hands-on experience with financial management software (e.g., Sage Intacct, BILL)",
+        "Superior data management and data analysis skills",
+        "Experience overseeing the annual audit",
+        "Experience in financial management and accounting within a nonprofit organization or association"
+    ],
+    "strengths": [
+        "Significant experience in administrative management, demonstrating strong organizational capabilities.",
+        "Proficient in English and various office software."
+    ],
+    "concerns": [
+        "Lack of direct experience in finance and accounting roles, specifically in managing financial operations.",
+        "Missing key financial management skills and software experience required for the role."
+    ],
+    "recommendation": "Consider candidates with direct accounting backgrounds and demonstrated financial management skills."
+}

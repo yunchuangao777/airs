@@ -1,0 +1,33 @@
+{
+    "candidate_id": "32409bd7-8bdc-4dc2-8ba0-546bf87bbac6",
+    "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+    "candidate_name": "张佳骏",
+    "job_title": "Finance and Accounting Manager",
+    "match_method": "ai",
+    "score": 55.0,
+    "skill_score": 40.0,
+    "experience_score": 60.0,
+    "education_score": 60.0,
+    "location_score": null,
+    "matched_skills": [],
+    "missing_required_skills": [
+        "Proficiency in Microsoft 365 applications (especially Excel)",
+        "Sound knowledge of accounting principles, standards, and regulations",
+        "Proficiency and hands-on experience with financial management software (e.g., Sage Intacct, BILL)",
+        "Superior data management and data analysis skills",
+        "Strong time management and organizational skills",
+        "Excellent verbal and written communication skills"
+    ],
+    "strengths": [
+        "Over 5 years of experience in finance and accounting roles",
+        "Experience with managing fixed assets and capital budgets",
+        "Good understanding of accounting practices"
+    ],
+    "concerns": [
+        "Lacks proficiency in specific required financial management software, such as Sage Intacct or BILL",
+        "Missing proficiency in Microsoft 365 applications, particularly Excel",
+        "No supervisory experience mentioned, which is preferred for the role",
+        "Does not have a CPA certification or a Master's degree as preferred qualifications"
+    ],
+    "recommendation": "Consider additional training in required software and communication skills. Explore opportunities to gain supervisory experience."
+}

@@ -1,0 +1,36 @@
+{
+    "candidate_id": "5e309846-6b99-41bf-9eae-5ad86185814f",
+    "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+    "candidate_name": "陈婕",
+    "job_title": "Finance and Accounting Manager",
+    "match_method": "ai",
+    "score": 72.0,
+    "skill_score": 60.0,
+    "experience_score": 75.0,
+    "education_score": 80.0,
+    "location_score": null,
+    "matched_skills": [
+        "财务管理",
+        "总账会计",
+        "财务软件使用"
+    ],
+    "missing_required_skills": [
+        "Proficiency in Microsoft 365 applications (especially Excel)",
+        "Sound knowledge of accounting principles, standards, and regulations",
+        "Proficiency and hands-on experience with financial management software (e.g., Sage Intacct, BILL)",
+        "Superior data management and data analysis skills",
+        "Strong time management and organizational skills",
+        "Excellent verbal and written communication skills"
+    ],
+    "strengths": [
+        "Over 8 years of experience in finance and accounting, with significant time in foreign enterprises",
+        "In-depth knowledge in managing financial systems and accounting procedures",
+        "Proficient in various accounting software and experienced in initial software development"
+    ],
+    "concerns": [
+        "Lack of specific experience with Microsoft 365 applications and financial management software like Sage Intacct",
+        "Missing advanced qualifications such as a Master's degree or CPA certification",
+        "Limited experience in managing day-to-day finance and accounting operations as specified in the job description"
+    ],
+    "recommendation": "Consider for a possible match; may need additional training in required financial software and enhancement of specific skills related to the job requirements."
+}

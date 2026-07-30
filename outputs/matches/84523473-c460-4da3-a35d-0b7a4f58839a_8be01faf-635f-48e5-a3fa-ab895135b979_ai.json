@@ -1,0 +1,32 @@
+{
+    "candidate_id": "8be01faf-635f-48e5-a3fa-ab895135b979",
+    "job_id": "84523473-c460-4da3-a35d-0b7a4f58839a",
+    "candidate_name": "曹珺",
+    "job_title": "Human Resources (HR) Manager",
+    "match_method": "ai",
+    "score": 25.0,
+    "skill_score": 10.0,
+    "experience_score": 10.0,
+    "education_score": 5.0,
+    "location_score": 0.0,
+    "matched_skills": [],
+    "missing_required_skills": [
+        "HR Management",
+        "Payroll Administration",
+        "Labour Relations",
+        "Disability Management",
+        "Knowledge of HR legislation",
+        "Excellent interpersonal skills",
+        "Excellent oral and written communication skills",
+        "Ability to maintain confidentiality",
+        "Organizational skills"
+    ],
+    "strengths": [],
+    "concerns": [
+        "Candidate does not possess required skills for the HR Manager role.",
+        "Lacks relevant experience in HR management and payroll administration.",
+        "Education background is not aligned with the job requirements.",
+        "No demonstrated experience in handling sensitive HR issues or knowledge of HR legislation."
+    ],
+    "recommendation": "Consider candidates with HR-related experience and skills for this role."
+}

@@ -1,3 +1,4 @@
+import uuid
 import pandas as pd
 import streamlit as st
 
@@ -37,6 +38,10 @@ def render_cv_upload():
             try:
                 cv = load_single_cv(path)
                 candidate = extract_cv_info(cv["text"])
+
+                # Always create the internal candidate ID in application code.
+                if not candidate.candidate_id:
+                    candidate.candidate_id = str(uuid.uuid4())
 
                 candidate.raw_text = cv["text"]
                 candidate.source_filename = cv["filename"]

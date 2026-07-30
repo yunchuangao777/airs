@@ -83,8 +83,17 @@ def build_candidate_dataframe(
     table_rows: list[dict] = []
 
     for candidate in candidates:
-        candidate_id = (
+        candidate_id = str(
             candidate.get("candidate_id") or ""
+        ).strip()
+
+        # Stable UI lookup key for older records created before
+        # candidate IDs were assigned during CV extraction.
+        candidate_lookup_key = (
+            candidate_id
+            or str(candidate.get("_source_path") or "").strip()
+            or str(candidate.get("source_filepath") or "").strip()
+            or str(candidate.get("source_filename") or "").strip()
         )
 
         candidate_skills = [
@@ -130,6 +139,7 @@ def build_candidate_dataframe(
                     candidate.get("source_filename") or ""
                 ),
                 "Candidate ID": candidate_id,
+                "_Candidate Lookup Key": candidate_lookup_key,
 
                 # Internal fields used only for filtering.
                 "_All Skills": candidate_skills,
@@ -554,6 +564,7 @@ def render_candidate_library() -> None:
 
     internal_columns = [
         "Candidate ID",
+        "_Candidate Lookup Key",
         "_All Skills",
         "_Matched Job IDs",
     ]
@@ -721,6 +732,7 @@ def render_candidate_library() -> None:
                 width="medium",
             ),
             "Candidate ID": None,
+            "_Candidate Lookup Key": None,
         },
     )
 
@@ -731,14 +743,28 @@ def render_candidate_library() -> None:
             selected_rows[0]
         ]
 
-        candidate_id = selected_row["Candidate ID"]
+        selected_lookup_key = str(
+            selected_row.get(
+                "_Candidate Lookup Key",
+                "",
+            )
+            or ""
+        ).strip()
 
         selected_candidate = next(
             (
                 candidate
                 for candidate in candidates
-                if candidate.get("candidate_id")
-                == candidate_id
+                if (
+                    str(
+                        candidate.get("candidate_id")
+                        or candidate.get("_source_path")
+                        or candidate.get("source_filepath")
+                        or candidate.get("source_filename")
+                        or ""
+                    ).strip()
+                    == selected_lookup_key
+                )
             ),
             None,
         )

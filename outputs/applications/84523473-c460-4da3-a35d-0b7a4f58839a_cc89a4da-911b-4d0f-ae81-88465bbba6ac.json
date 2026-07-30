@@ -1,0 +1,16 @@
+{
+    "application_id": "afbb0d0f-ae96-4e97-a1e8-2e8d052c9a5c",
+    "candidate_id": "cc89a4da-911b-4d0f-ae81-88465bbba6ac",
+    "job_id": "84523473-c460-4da3-a35d-0b7a4f58839a",
+    "status": "applied",
+    "created_time": "2026-07-30T14:46:17",
+    "updated_time": "2026-07-30T14:46:17",
+    "notes": "Added from ai matching 84523473-c460-4da3-a35d-0b7a4f58839a with match score 62.0",
+    "status_history": [
+        {
+            "status": "applied",
+            "changed_time": "2026-07-30T14:46:17",
+            "note": "Added from ai matching 84523473-c460-4da3-a35d-0b7a4f58839a with match score 62.0"
+        }
+    ]
+}

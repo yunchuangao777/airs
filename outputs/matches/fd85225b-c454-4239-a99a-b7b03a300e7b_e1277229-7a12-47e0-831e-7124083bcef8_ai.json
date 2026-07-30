@@ -1,0 +1,39 @@
+{
+    "candidate_id": "e1277229-7a12-47e0-831e-7124083bcef8",
+    "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+    "candidate_name": "郝秋君",
+    "job_title": "Finance and Accounting Manager",
+    "match_method": "ai",
+    "score": 65.0,
+    "skill_score": 60.0,
+    "experience_score": 70.0,
+    "education_score": 70.0,
+    "location_score": null,
+    "matched_skills": [
+        "会计",
+        "SAP",
+        "MS操作系统",
+        "英语"
+    ],
+    "missing_required_skills": [
+        "Proficiency in Microsoft 365 applications (especially Excel)",
+        "Sound knowledge of accounting principles, standards, and regulations",
+        "Proficiency and hands-on experience with financial management software (e.g., Sage Intacct, BILL)",
+        "Superior data management and data analysis skills",
+        "Strong time management and organizational skills",
+        "Detail-oriented with a passion for accuracy",
+        "Excellent verbal and written communication skills"
+    ],
+    "strengths": [
+        "Five years of experience in accounting roles",
+        "Familiarity with SAP and proficient in English",
+        "Strong team spirit and work ethic"
+    ],
+    "concerns": [
+        "Lacks proficiency in Microsoft 365 applications, especially Excel",
+        "No hands-on experience with financial management software specified in the job description",
+        "Lacks experience in financial management and accounting in a nonprofit or association setting",
+        "Does not meet CPA certification or preferred education level"
+    ],
+    "recommendation": null
+}

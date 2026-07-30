@@ -1,0 +1,29 @@
+{
+    "candidate_id": "cc89a4da-911b-4d0f-ae81-88465bbba6ac",
+    "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+    "candidate_name": "Wang Xue Ying Melody",
+    "job_title": "Finance and Accounting Manager",
+    "match_method": "ai",
+    "score": 35.0,
+    "skill_score": 0.0,
+    "experience_score": 0.0,
+    "education_score": 50.0,
+    "location_score": 0.0,
+    "matched_skills": [],
+    "missing_required_skills": [
+        "Proficiency in Microsoft 365 applications (especially Excel)",
+        "Sound knowledge of accounting principles, standards, and regulations",
+        "Proficiency and hands-on experience with financial management software (e.g., Sage Intacct, BILL)",
+        "Superior data management and data analysis skills",
+        "Strong time management and organizational skills",
+        "Detail-oriented with a passion for accuracy",
+        "Excellent verbal and written communication skills"
+    ],
+    "strengths": [],
+    "concerns": [
+        "Candidate lacks the essential skills required for the finance and accounting manager role.",
+        "No relevant experience in finance or accounting management.",
+        "Educational background does not meet the job requirements, as the candidate's degree is not in finance or accounting."
+    ],
+    "recommendation": "Consider candidates with a background in finance and accounting for this position."
+}

@@ -1,9 +1,11 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 from typing import List, Optional
 from datetime import datetime
 from enum import Enum
 
 class Experience(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     company: Optional[str] = None
     title: Optional[str] = None
     start_date: Optional[str] = None
@@ -12,6 +14,8 @@ class Experience(BaseModel):
 
 
 class Education(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     school: Optional[str] = None
     degree: Optional[str] = None
     major: Optional[str] = None
@@ -19,6 +23,7 @@ class Education(BaseModel):
 
 
 class CVInfo(BaseModel):
+    model_config = ConfigDict(extra="forbid")
 
     candidate_id: str | None = None
     cv_hash: str | None = None
@@ -38,18 +43,16 @@ class CVInfo(BaseModel):
         default_factory=list
     )
 
-    education: list[dict] = Field(
+    education: list[Education] = Field(
         default_factory=list
     )
 
-    work_experience: list[dict] = Field(
+    work_experience: list[Experience] = Field(
         default_factory=list
     )
 
     total_years_experience: float | None = None
 
-    raw_text: Optional[str] = None
-    source_filepath: Optional[str] = None
 
 class JobInfo(BaseModel):
     job_id: Optional[str] = None

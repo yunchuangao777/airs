@@ -1,0 +1,36 @@
+{
+    "candidate_id": "9f7c17ac-6a27-42fe-bb1f-815f82bae464",
+    "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+    "candidate_name": "曹珺",
+    "job_title": "Finance and Accounting Manager",
+    "match_method": "ai",
+    "score": 70.0,
+    "skill_score": 65.0,
+    "experience_score": 75.0,
+    "education_score": 70.0,
+    "location_score": null,
+    "matched_skills": [
+        "会计",
+        "财务分析",
+        "审计"
+    ],
+    "missing_required_skills": [
+        "Proficiency in Microsoft 365 applications",
+        "Proficiency and hands-on experience with financial management software (e.g., Sage Intacct, BILL)",
+        "Superior data management and data analysis skills",
+        "Strong time management and organizational skills",
+        "Detail-oriented with a passion for accuracy",
+        "Excellent verbal and written communication skills"
+    ],
+    "strengths": [
+        "9 years of work experience in accounting and finance",
+        "Experience with financial reporting and audit processes",
+        "Strong analytical skills from previous roles in accounting firms"
+    ],
+    "concerns": [
+        "Lacks proficiency in Microsoft 365 applications, especially Excel",
+        "No mention of experience with specific financial management software like Sage Intacct or BILL",
+        "Does not have supervisory experience"
+    ],
+    "recommendation": "Consider for a finance role with additional training in required software."
+}

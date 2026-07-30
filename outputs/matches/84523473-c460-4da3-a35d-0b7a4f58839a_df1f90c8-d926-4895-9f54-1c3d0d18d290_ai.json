@@ -1,0 +1,34 @@
+{
+    "candidate_id": "df1f90c8-d926-4895-9f54-1c3d0d18d290",
+    "job_id": "84523473-c460-4da3-a35d-0b7a4f58839a",
+    "candidate_name": "孙雯彬",
+    "job_title": "Human Resources (HR) Manager",
+    "match_method": "ai",
+    "score": 25.0,
+    "skill_score": 0.0,
+    "experience_score": 0.0,
+    "education_score": 50.0,
+    "location_score": 0.0,
+    "matched_skills": [],
+    "missing_required_skills": [
+        "HR Management",
+        "Payroll Administration",
+        "Labour Relations",
+        "Disability Management",
+        "Knowledge of HR legislation",
+        "Excellent interpersonal skills",
+        "Excellent oral and written communication skills",
+        "Ability to maintain confidentiality",
+        "Organizational skills"
+    ],
+    "strengths": [
+        "Relevant experience in finance and accounting"
+    ],
+    "concerns": [
+        "No HR experience or skills relevant to the HR Manager position",
+        "Lacks educational qualifications in HR Management",
+        "No evidence of interpersonal or communication skills outlined in the job description",
+        "No legislative knowledge in HR is mentioned"
+    ],
+    "recommendation": "Unsuitable for the HR Manager position due to lack of relevant experience and skills."
+}

@@ -1,0 +1,37 @@
+{
+    "candidate_id": "df1f90c8-d926-4895-9f54-1c3d0d18d290",
+    "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+    "candidate_name": "孙雯彬",
+    "job_title": "Finance and Accounting Manager",
+    "match_method": "ai",
+    "score": 65.0,
+    "skill_score": 60.0,
+    "experience_score": 70.0,
+    "education_score": 75.0,
+    "location_score": null,
+    "matched_skills": [
+        "会计学",
+        "应付账款",
+        "SAP",
+        "英语"
+    ],
+    "missing_required_skills": [
+        "Proficiency in Microsoft 365 applications",
+        "Sound knowledge of accounting principles",
+        "Hands-on experience with financial management software",
+        "Data management and analysis skills",
+        "Strong time management and organizational skills",
+        "Excellent communication skills"
+    ],
+    "strengths": [
+        "Over 8 years of accounting experience with a focus on accounts payable",
+        "Experience working at a reputable company (L'Oréal)",
+        "Bachelor's degree in Accounting"
+    ],
+    "concerns": [
+        "Lacks direct experience with financial management software like Sage Intacct or BILL",
+        "No supervisory experience or CPA certification",
+        "Limited exposure to nonprofit financial management, which may be relevant for the role"
+    ],
+    "recommendation": "Consider for finance roles with a focus on accounts payable, but further training or experience in broad financial management may be necessary."
+}

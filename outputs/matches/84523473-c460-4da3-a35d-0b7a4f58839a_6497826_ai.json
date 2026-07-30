@@ -1,0 +1,31 @@
+{
+    "candidate_id": "6497826",
+    "job_id": "84523473-c460-4da3-a35d-0b7a4f58839a",
+    "candidate_name": "孙雯彬",
+    "job_title": "Human Resources (HR) Manager",
+    "match_method": "ai",
+    "score": 20.0,
+    "skill_score": 0.0,
+    "experience_score": 0.0,
+    "education_score": 0.0,
+    "location_score": 0.0,
+    "matched_skills": [],
+    "missing_required_skills": [
+        "HR Management",
+        "Payroll Administration",
+        "Labour Relations",
+        "Disability Management",
+        "Knowledge of HR legislation",
+        "Excellent interpersonal skills",
+        "Excellent oral and written communication skills",
+        "Ability to maintain confidentiality",
+        "Organizational skills"
+    ],
+    "strengths": [],
+    "concerns": [
+        "Candidate has no relevant experience or skills related to HR management or the required responsibilities of the position.",
+        "Candidate has a strong accounting background, which is unrelated to the HR role.",
+        "Education does not meet the job requirements (no HR-specific education or CHRP designation)."
+    ],
+    "recommendation": "The candidate is not suitable for the HR Manager position at DNSSAB due to a complete mismatch in required skills, experience, and education."
+}

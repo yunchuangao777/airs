@@ -1,0 +1,37 @@
+{
+    "candidate_id": "50499964",
+    "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+    "candidate_name": "孙慧颖",
+    "job_title": "Finance and Accounting Manager",
+    "match_method": "ai",
+    "score": 62.0,
+    "skill_score": 60.0,
+    "experience_score": 65.0,
+    "education_score": 70.0,
+    "location_score": null,
+    "matched_skills": [
+        "会计",
+        "税务",
+        "英语"
+    ],
+    "missing_required_skills": [
+        "Proficiency in Microsoft 365 applications",
+        "Knowledge of financial management software",
+        "Data management and analysis skills",
+        "Time management skills",
+        "Verbal and written communication skills"
+    ],
+    "strengths": [
+        "Over 5 years of experience in accounting roles",
+        "Solid understanding of tax regulations and accounting principles",
+        "Strong proficiency in accounting software (e.g., SAP)",
+        "Good communication skills (especially in English)"
+    ],
+    "concerns": [
+        "Lacks experience with Microsoft 365 and financial management applications such as Sage Intacct",
+        "Limited supervisory experience",
+        "No direct experience managing finance operations at a managerial level",
+        "Missing data analysis and cash flow forecasting experience"
+    ],
+    "recommendation": "Consider training in Microsoft 365 and financial management software, and gain supervisory experience in finance roles."
+}

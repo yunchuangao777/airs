@@ -1,0 +1,36 @@
+{
+    "candidate_id": "6497826",
+    "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+    "candidate_name": "孙雯彬",
+    "job_title": "Finance and Accounting Manager",
+    "match_method": "ai",
+    "score": 55.0,
+    "skill_score": 50.0,
+    "experience_score": 60.0,
+    "education_score": 70.0,
+    "location_score": null,
+    "matched_skills": [
+        "Tax Declaration",
+        "Accounts Payable",
+        "Financial Reporting",
+        "SAP"
+    ],
+    "missing_required_skills": [
+        "Proficiency in Microsoft 365 applications",
+        "Sound knowledge of accounting principles",
+        "Proficiency with financial management software other than SAP",
+        "Superior data management and analysis skills",
+        "Excellent verbal and written communication skills"
+    ],
+    "strengths": [
+        "8+ years of experience in accounts payable and financial operations",
+        "Currently working in a reputable company (L'Oréal)",
+        "Strong background in handling foreign currency payments and tax declarations"
+    ],
+    "concerns": [
+        "Lacks proficiency in Microsoft 365 applications (especially Excel)",
+        "Limited experience with financial management software other than SAP",
+        "No supervisory experience or experience overseeing audits"
+    ],
+    "recommendation": "Candidate has relevant experience in accounting but lacks critical required skills. Consider for lower-level finance positions."
+}

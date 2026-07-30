@@ -1,0 +1,29 @@
+{
+    "candidate_id": "50499964",
+    "job_id": "84523473-c460-4da3-a35d-0b7a4f58839a",
+    "candidate_name": "孙慧颖",
+    "job_title": "Human Resources (HR) Manager",
+    "match_method": "ai",
+    "score": 30.0,
+    "skill_score": 0.0,
+    "experience_score": 30.0,
+    "education_score": 0.0,
+    "location_score": 0.0,
+    "matched_skills": [],
+    "missing_required_skills": [
+        "HR Management",
+        "Payroll Administration",
+        "Labour Relations",
+        "Disability Management",
+        "Knowledge of HR legislation",
+        "Excellent interpersonal skills",
+        "Excellent oral and written communication skills",
+        "Ability to maintain confidentiality",
+        "Organizational skills"
+    ],
+    "strengths": [],
+    "concerns": [
+        "The candidate has no relevant HR management experience as required by the job description. Most experience lies in accounting which does not align with the HR Manager role. No required skills or qualifications for HR management are present in the candidate's profile. Limited education related to HR; only holds a degree in Accounting."
+    ],
+    "recommendation": "Consider candidates with HR-specific qualifications and experience to meet the job requirements."
+}

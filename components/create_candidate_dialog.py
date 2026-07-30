@@ -113,6 +113,12 @@ def render_upload_candidate() -> None:
                 cv["text"]
             )
 
+            # The AI extraction schema allows candidate_id to be empty.
+            # Assign an application-owned ID before saving so table
+            # selection and all downstream workflows can identify the record.
+            if not candidate.candidate_id:
+                candidate.candidate_id = str(uuid.uuid4())
+
             candidate.raw_text = cv["text"]
             candidate.source_filename = cv["filename"]
             candidate.source_filepath = cv.get(

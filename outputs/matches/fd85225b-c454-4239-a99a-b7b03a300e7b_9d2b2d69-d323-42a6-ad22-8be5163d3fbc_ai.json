@@ -1,0 +1,39 @@
+{
+    "candidate_id": "9d2b2d69-d323-42a6-ad22-8be5163d3fbc",
+    "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+    "candidate_name": "孙慧颖",
+    "job_title": "Finance and Accounting Manager",
+    "match_method": "ai",
+    "score": 62.0,
+    "skill_score": 65.0,
+    "experience_score": 60.0,
+    "education_score": 70.0,
+    "location_score": 60.0,
+    "matched_skills": [
+        "会计",
+        "税务",
+        "应收",
+        "Windows系统",
+        "Office软件"
+    ],
+    "missing_required_skills": [
+        "Proficiency in Microsoft 365 applications (especially Excel)",
+        "Sound knowledge of accounting principles, standards, and regulations",
+        "Proficiency and hands-on experience with financial management software (e.g., Sage Intacct, BILL)",
+        "Superior data management and data analysis skills",
+        "Excellent verbal and written communication skills"
+    ],
+    "strengths": [
+        "5+ years of experience in finance and accounting roles",
+        "Strong knowledge of tax accounting and compliance",
+        "Experience in high-pressure environments",
+        "Solid education in accounting"
+    ],
+    "concerns": [
+        "Lacks advanced degree or CPA certification",
+        "No experience with specified financial management software",
+        "Limited supervisory experience",
+        "Does not meet the preferred experience in nonprofit financial management"
+    ],
+    "recommendation": "Consider for roles requiring similar skills but may need additional training in required financial management software."
+}

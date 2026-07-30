@@ -1,0 +1,32 @@
+{
+    "candidate_id": "906afec1-75df-4b01-9601-32f644e2f269",
+    "job_id": "84523473-c460-4da3-a35d-0b7a4f58839a",
+    "candidate_name": "郝秋君",
+    "job_title": "Human Resources (HR) Manager",
+    "match_method": "ai",
+    "score": 30.0,
+    "skill_score": 20.0,
+    "experience_score": 10.0,
+    "education_score": 0.0,
+    "location_score": 0.0,
+    "matched_skills": [],
+    "missing_required_skills": [
+        "HR Management",
+        "Payroll Administration",
+        "Labour Relations",
+        "Disability Management",
+        "Knowledge of HR legislation",
+        "Excellent interpersonal skills",
+        "Excellent oral and written communication skills",
+        "Ability to maintain confidentiality",
+        "Organizational skills"
+    ],
+    "strengths": [],
+    "concerns": [
+        "Candidate has no HR management experience.",
+        "Candidate lacks required educational qualifications related to HR.",
+        "All required skills for the position are missing. The candidate's skills primarily relate to accounting rather than HR functions.",
+        "No evidence of experience in payroll or labor relations, which are essential for the HR Manager role."
+    ],
+    "recommendation": "The candidate does not meet the essential requirements for the HR Manager position and should not be considered."
+}

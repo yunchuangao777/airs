@@ -1,0 +1,38 @@
+{
+    "candidate_id": "906afec1-75df-4b01-9601-32f644e2f269",
+    "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+    "candidate_name": "郝秋君",
+    "job_title": "Finance and Accounting Manager",
+    "match_method": "ai",
+    "score": 67.0,
+    "skill_score": 60.0,
+    "experience_score": 70.0,
+    "education_score": 75.0,
+    "location_score": null,
+    "matched_skills": [
+        "会计",
+        "SAP",
+        "MS操作系统",
+        "英语"
+    ],
+    "missing_required_skills": [
+        "Proficiency in Microsoft 365 applications (especially Excel)",
+        "Sound knowledge of accounting principles, standards, and regulations",
+        "Proficiency and hands-on experience with financial management software (e.g., Sage Intacct, BILL)",
+        "Superior data management and data analysis skills",
+        "Strong time management and organizational skills",
+        "Detail-oriented with a passion for accuracy",
+        "Excellent verbal and written communication skills"
+    ],
+    "strengths": [
+        "Over 5 years of work experience in accounting and finance",
+        "Proficient in SAP, which is relevant to financial management",
+        "Strong language skills in English, which may aid in communication"
+    ],
+    "concerns": [
+        "Lacks experience with Microsoft 365 applications, notably Excel",
+        "No experience with financial management software such as Sage Intacct or BILL",
+        "Missing educational qualifications like a Master’s degree or CPA certification and supervisory experience"
+    ],
+    "recommendation": "Consider for a role requiring general accounting skills, but further training in financial management software and relevant applications is necessary."
+}

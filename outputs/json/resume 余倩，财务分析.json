@@ -1,0 +1,76 @@
+{
+    "candidate_id": "f4a14529-280e-4531-acf3-854a7fd93470",
+    "cv_hash": null,
+    "source_filename": "resume 余倩，财务分析.docx",
+    "source_filepath": "uploads\\resume 余倩，财务分析.docx",
+    "upload_time": null,
+    "raw_text": "Resume\nBasic Info.\nName:\nEchoYU\nGender:\nFemale\nDate of Birth:\n1982/7/27\nResidency:\nShanghai-Yangpu\nYrs.of\nExperience:\n>5 years\nEmail:\nyu\nqian\n727@hotmail.com\nMobile Phone:\n086-13817742024\nHome Tel:\n086-021-65809345\nCurrent Salary:\n1\n5\n0,000-\n3\n0,000 RMB\n目前薪资\n：\n14k*12+25-30%\n的年薪的\nbonus\n期望是\n25-30w\n的年薪，最好是\n30w\nHukou:\nShanghai\nCareer Objective\nI can start:\nto be determined\nType of Employment:\nFull-time\nDesired Industry:\nDesired Location:\nDesired Salary:\nNegotiable /Month\nDesired Position:\nFinancial\nAnalyst ;\nFinance\nSupervisor ;\nAudit Executive/\nAssistant ;\nFinancial Analysis Manager/\nCost Accounting Manager/Supervisor\nWork Experience\n2008/7--\nPresent:Unilever\n(>500\npeople )\nIndustry:\nFMCG(\nFood\n,\nBeverage,Cosmetics\n)\n2008/7-2012/\nSupply Chain Finance\nHome\nC\nare& Personal\nCare\nCentral\n(Costing Assistant Manager)\nCapital investment analysis\nand business case supporting\n: Provide support and critical insight on the assumption of business\ncases;\nMonthly Gross margin Variance analysis;\n(received a big compliment from Unilever AAC)\nMonthly\nrolling forecast for Supply Chain cost\n;\n(forecast accuracy always keep in target)\nLead\nMonthend\nClosing\nand Monthly result analysis\nfor Home Care& Personal\nMonthly Supply Chain Booklet and KPI\ntracking;\nConsolidate CG cash and cash flow\nforecast;\nLead HPC\nQuarterly Standard Cost and Transfer Price\nReview;\nAnnual Budget\nReview and Setting for\nHPC\nSAP Key user while SAP\non line\nin supply chain\nfinance(\nCO).\nR\neport to\nsupply chain finance Mgr\n2012/\n4\n-Current\nBrand\nFinance  Hair\nCategory\n(\nAssistant Manager)\nReview and Control\nA\ndvertising\n&\nP\nromotion\nbudget\nMonthly Hair\nCategory rolling forecast\nand monthly variance analysis\nMonthly Hair gross margin variance analysis\nGM% improvement\nproject\nin Hair\nM\nonthly brand performance review\nPromotion activity\nanalysis\nto improve promotion activity efficiency\nHair\nsampling and\ndigital\nsaving\n( so\nfar delivery\n0.8M\nE saving in Hair Category)\nInnovation business case analysis\neport\nto :\nBrand finance Mgr\nSubordinate\ns:2people\n2006/7--2008/\n7:L'Oreal\nBeautylux\nCosmetics\nCO.,LTD\nCost Accounting Specialist\nMake and Track price list; Purchasing variance analysis and follow up, include STD Price check and set up in ERP system; Production variance analysis and follow up, include consumption and labor efficiency with work order; Stock operational\ncontrol;include\nStock variance analysis and Slowing moving &Obsolete follow-up analysis;\nFllow\nup subcontract goods and sub fee variance analysis; Match purchase invoice with receipt and validate voucher; Monthly special stock movement analysis and make monthly\nstokc\nreport;\nReport Directly to:\nAccountingSupervisor\n离职原因：自身的职业发展规划，想往财务管理方向转。\n2005/5--2006/\n7\n:Brightdairy CO., LTD\nFood,Beverage,Cosmetics\nAP\nMatch invoice with the purchasing and validate the entry. Follow the payment of supplier. Follow the expense for every department. Arrange the foreign currency payment for whole company. Monthly expense report\ncreat\nand payment report.\naccountant\nsupervisor\n离职原因：光明乳业是个民营企业，自己也想往平台大一点的，管理更为完善的企业去发展\n2003/7--2005/5:LongDong Business Hotel\nAccounting, Auditing\nAudit Executive/Assistant\n（\n实习\n）\nexpense follow and control daily income audit with expense report\nmonthly expense report & income report\nFinance Manager\nEducation\n2003/9 -- 2006/3\nFuDan\nUniversity\nBachelor\n非全日制\n2000/9 -- 2003/6\nLiXin\nAccounting\nCollege\nAudit\nOthers\n大专\nCertifications\n2005/5\nAssistant Accountant\n2003/9\nAccounting take-up certificate\n2002/6\nCET4\n2002/3\nAccounting computerized certificate\nLanguage Skills\nEnglish (Very Good ):\nGrade of English:\nCET 4",
+    "name": "Echo YU",
+    "email": "yu.qian.727@hotmail.com",
+    "phone": "086-13817742024",
+    "location": "Shanghai-Yangpu",
+    "summary": null,
+    "skills": [
+        "Financial Analysis",
+        "Cost Accounting",
+        "Budget Management",
+        "Variance Analysis",
+        "SAP",
+        "Forecasting",
+        "Reporting",
+        "Advertising & Promotion Analysis",
+        "Project Management"
+    ],
+    "education": [
+        {
+            "school": "FuDan University",
+            "degree": "Bachelor",
+            "major": null,
+            "graduation_year": "2006"
+        },
+        {
+            "school": "LiXin Accounting College",
+            "degree": "Associate",
+            "major": "Audit",
+            "graduation_year": "2003"
+        }
+    ],
+    "work_experience": [
+        {
+            "company": "Unilever",
+            "title": "Assistant Manager, Brand Finance",
+            "start_date": "2012/4",
+            "end_date": "Present",
+            "description": "Review and control Advertising & Promotion budget, monthly variance analysis, GM% improvement project, innovation business case analysis."
+        },
+        {
+            "company": "Unilever",
+            "title": "Costing Assistant Manager, Supply Chain Finance",
+            "start_date": "2008/7",
+            "end_date": "2012/4",
+            "description": "Capital investment analysis, monthly gross margin variance analysis, lead month-end closing and KPI tracking."
+        },
+        {
+            "company": "L'Oreal Beautylux Cosmetics CO., LTD",
+            "title": "Cost Accounting Specialist",
+            "start_date": "2006/7",
+            "end_date": "2008/7",
+            "description": "Make and track price list, purchasing variance analysis, stock operational control."
+        },
+        {
+            "company": "Brightdairy CO., LTD",
+            "title": "Accountant Supervisor",
+            "start_date": "2005/5",
+            "end_date": "2006/7",
+            "description": "Match invoices, follow payment of suppliers, arrange foreign currency payments."
+        },
+        {
+            "company": "LongDong Business Hotel",
+            "title": "Audit Executive/Assistant",
+            "start_date": "2003/7",
+            "end_date": "2005/5",
+            "description": "Expense follow and control, monthly expense and income reports."
+        }
+    ],
+    "total_years_experience": 20.0
+}

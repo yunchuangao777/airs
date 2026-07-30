@@ -1,0 +1,158 @@
+{
+  "question_set_id": "7c838092-2f28-4cb4-b5cb-6418c0765038",
+  "package_id": "99ffdcf4-ea51-424c-b000-0deeb8d29f4d",
+  "candidate_id": "5e309846-6b99-41bf-9eae-5ad86185814f",
+  "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+  "application_id": "608c6737-c456-45af-aab6-7c9994c32302",
+  "candidate_name": "陈婕",
+  "job_title": "Finance and Accounting Manager",
+  "questions": [
+    {
+      "question_id": "Q1",
+      "source": "ai",
+      "original_question": "Can you describe your role as a Senior General Ledger Accountant at Gucci and the responsibilities you managed?",
+      "edited_question": "Can you describe your role as a Senior General Ledger Accountant at Gucci and the responsibilities you managed?",
+      "selected": true,
+      "category": "experience",
+      "competency": "Relevant Experience",
+      "reason": "This question assesses the depth of experience and involvement in daily finance and accounting operations, which is a key requirement for the new role.",
+      "strong_answer_indicators": [
+        "Presented specific responsibilities with quantifiable outcomes",
+        "Explained workflow and collaboration with other departments",
+        "Demonstrated understanding of compliance and financial reporting"
+      ],
+      "warning_signs": [
+        "Vague descriptions of responsibilities",
+        "Inability to discuss challenges faced or resolutions implemented",
+        "Lack of detail in role's impact"
+      ],
+      "suggested_follow_ups": [
+        "What was your greatest achievement in that position?",
+        "How did you manage deadlines and pressure during the month-end close?"
+      ],
+      "created_time": "2026-07-30T18:59:55+00:00",
+      "updated_time": "2026-07-30T18:59:55+00:00"
+    },
+    {
+      "question_id": "Q2",
+      "source": "ai",
+      "original_question": "How familiar are you with financial management software such as Sage Intacct, and how have you used it in your past roles?",
+      "edited_question": "How familiar are you with financial management software such as Sage Intacct, and how have you used it in your past roles?",
+      "selected": true,
+      "category": "technical",
+      "competency": "Technical Skills",
+      "reason": "To understand the candidate's technical proficiency and ability to adapt to required software for the position.",
+      "strong_answer_indicators": [
+        "Detailed experience using similar software",
+        "Familiarity with features and benefits for accounting management",
+        "Examples of how software improved efficiency"
+      ],
+      "warning_signs": [
+        "No experience with specific software",
+        "Inability to relate software use to past work",
+        "Limited understanding of software capabilities"
+      ],
+      "suggested_follow_ups": [
+        "Have you been involved in any implementation or training of financial software?",
+        "What specific features do you find most beneficial?"
+      ],
+      "created_time": "2026-07-30T18:59:55+00:00",
+      "updated_time": "2026-07-30T18:59:55+00:00"
+    },
+    {
+      "question_id": "Q3",
+      "source": "ai",
+      "original_question": "Give an example of a significant challenge you faced during the month-end close process and how you resolved it.",
+      "edited_question": "Give an example of a significant challenge you faced during the month-end close process and how you resolved it.",
+      "selected": true,
+      "category": "problem_solving",
+      "competency": "Problem Solving",
+      "reason": "This question evaluates the candidate's problem-solving skills and ability to handle pressure in financial tasks.",
+      "strong_answer_indicators": [
+        "Provided a clear, structured approach to resolving the issue",
+        "Mentioned stakeholders involved and communication strategies",
+        "Examined impact on financial reporting timelines"
+      ],
+      "warning_signs": [
+        "Generic answers without specifics",
+        "Failure to acknowledge inherent challenges",
+        "Inability to articulate the outcome"
+      ],
+      "suggested_follow_ups": [
+        "What alternative solutions did you consider?",
+        "How did this experience change your approach in future situations?"
+      ],
+      "created_time": "2026-07-30T18:59:55+00:00",
+      "updated_time": "2026-07-30T18:59:55+00:00"
+    },
+    {
+      "question_id": "Q4",
+      "source": "ai",
+      "original_question": "What is your experience with budget development and monitoring, and how do you ensure accuracy in your forecasting?",
+      "edited_question": "What is your experience with budget development and monitoring, and how do you ensure accuracy in your forecasting?",
+      "selected": true,
+      "category": "technical",
+      "competency": "Technical Skills",
+      "reason": "To gauge the candidate's ability to work with budgets, an important responsibility in the new role.",
+      "strong_answer_indicators": [
+        "Described processes for developing and monitoring budgets",
+        "Provided examples of successful forecasting",
+        "Discussed adjustments made based on budget reviews"
+      ],
+      "warning_signs": [
+        "No formal experience with budgeting",
+        "Unclear understanding of forecasting techniques",
+        "No examples of past successes"
+      ],
+      "suggested_follow_ups": [
+        "How do you communicate budget changes to stakeholders?",
+        "What tools or methods do you prefer for tracking budget performance?"
+      ],
+      "created_time": "2026-07-30T18:59:55+00:00",
+      "updated_time": "2026-07-30T18:59:55+00:00"
+    },
+    {
+      "question_id": "Q5",
+      "source": "ai",
+      "original_question": "How do you communicate complex financial information to non-financial stakeholders?",
+      "edited_question": "How do you communicate complex financial information to non-financial stakeholders?",
+      "selected": true,
+      "category": "closing",
+      "competency": "Communication",
+      "reason": "This question assesses the candidate's communication skills and transparency, which are crucial for collaboration and operational success.",
+      "strong_answer_indicators": [
+        "Explained methods used to simplify complex information",
+        "Provided specific examples of successful communication",
+        "Discussed feedback received from stakeholders"
+      ],
+      "warning_signs": [
+        "Struggled to articulate a clear communication strategy",
+        "Relies heavily on jargon without explanation",
+        "No previous experience conveying financial concepts"
+      ],
+      "suggested_follow_ups": [
+        "Can you provide an example where communication improved outcomes?",
+        "How would you handle a situation where a stakeholder disagrees with your analysis?"
+      ],
+      "created_time": "2026-07-30T18:59:55+00:00",
+      "updated_time": "2026-07-30T18:59:55+00:00"
+    },
+    {
+      "question_id": "CUSTOM-1",
+      "source": "recruiter",
+      "original_question": "",
+      "edited_question": "Describe one project that made you exciting",
+      "selected": true,
+      "category": "motivation",
+      "competency": "",
+      "reason": "",
+      "strong_answer_indicators": [],
+      "warning_signs": [],
+      "suggested_follow_ups": [],
+      "created_time": "2026-07-30T19:02:40+00:00",
+      "updated_time": "2026-07-30T19:02:40+00:00"
+    }
+  ],
+  "created_time": "2026-07-30T18:59:55+00:00",
+  "updated_time": "2026-07-30T19:02:40+00:00"
+}

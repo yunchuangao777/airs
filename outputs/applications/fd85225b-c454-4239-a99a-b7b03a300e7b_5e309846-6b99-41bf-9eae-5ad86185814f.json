@@ -1,0 +1,21 @@
+{
+    "application_id": "608c6737-c456-45af-aab6-7c9994c32302",
+    "candidate_id": "5e309846-6b99-41bf-9eae-5ad86185814f",
+    "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+    "status": "interview",
+    "created_time": "2026-07-30T14:48:47",
+    "updated_time": "2026-07-30T14:58:47",
+    "notes": "Added from ai matching fd85225b-c454-4239-a99a-b7b03a300e7b with match score 72.0",
+    "status_history": [
+        {
+            "status": "applied",
+            "changed_time": "2026-07-30T14:48:47",
+            "note": "Added from ai matching fd85225b-c454-4239-a99a-b7b03a300e7b with match score 72.0"
+        },
+        {
+            "status": "interview",
+            "changed_time": "2026-07-30T14:58:47",
+            "note": "Updated from Hiring Management"
+        }
+    ]
+}

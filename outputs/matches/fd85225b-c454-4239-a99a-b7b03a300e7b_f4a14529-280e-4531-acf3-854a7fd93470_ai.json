@@ -1,0 +1,38 @@
+{
+    "candidate_id": "f4a14529-280e-4531-acf3-854a7fd93470",
+    "job_id": "fd85225b-c454-4239-a99a-b7b03a300e7b",
+    "candidate_name": "Echo YU",
+    "job_title": "Finance and Accounting Manager",
+    "match_method": "ai",
+    "score": 65.0,
+    "skill_score": 70.0,
+    "experience_score": 65.0,
+    "education_score": 70.0,
+    "location_score": null,
+    "matched_skills": [
+        "Financial Analysis",
+        "Cost Accounting",
+        "Budget Management",
+        "Variance Analysis",
+        "Reporting"
+    ],
+    "missing_required_skills": [
+        "Proficiency in Microsoft 365 applications (especially Excel)",
+        "Knowledge of accounting principles, standards, and regulations",
+        "Proficiency with financial management software (e.g., Sage Intacct, BILL)",
+        "Data management and analysis skills",
+        "Strong time management and organizational skills",
+        "Excellent verbal and written communication skills"
+    ],
+    "strengths": [
+        "Over 20 years of experience in finance and accounting roles",
+        "Strong background in financial analysis and budgeting",
+        "Experience in managing finance operations in large corporations like Unilever"
+    ],
+    "concerns": [
+        "Lacks specified experience with Microsoft 365 and specific financial management software",
+        "No mention of supervisory experience or involvement in annual audits",
+        "Education meets basic requirements but lacks further qualifications like a Master's degree or CPA"
+    ],
+    "recommendation": "Consider for a possible match but may need training in required software and supervisory skills."
+}
