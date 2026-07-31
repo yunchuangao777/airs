@@ -372,7 +372,10 @@ def render_job_card(
         get_completed_candidate_count(summary)
     )
 
-    with st.container(border=True):
+    with st.container(
+        border=True,
+        key=f"hiring_job_card_{index}",
+    ):
         heading_col, summary_col = st.columns(
             [3, 2]
         )
@@ -428,6 +431,45 @@ def render_job_overview(
     """
     Render the Hiring Management Job Overview tab.
     """
+    st.markdown(
+        """
+        <style>
+        /*
+        Each job container has a Streamlit key beginning with
+        "hiring_job_card_". Streamlit exposes that key as a CSS
+        class beginning with "st-key-", which is more stable than
+        targeting internal data-testid wrappers.
+        */
+        [class*="st-key-hiring_job_card_"] {
+            border: 3px solid rgba(46, 125, 90, 0.75) !important;
+            border-radius: 14px !important;
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(46, 125, 90, 0.055),
+                    rgba(46, 125, 90, 0.015)
+                ) !important;
+            box-shadow:
+                0 4px 14px rgba(0, 0, 0, 0.12) !important;
+            padding: 0.45rem 0.65rem 0.65rem 0.65rem !important;
+            margin-bottom: 1rem !important;
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                transform 0.2s ease !important;
+        }
+
+        [class*="st-key-hiring_job_card_"]:hover {
+            border-color: rgba(28, 105, 67, 1) !important;
+            box-shadow:
+                0 7px 20px rgba(0, 0, 0, 0.18) !important;
+            transform: translateY(-2px);
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     st.markdown("### Job Overview")
 
     # st.caption(

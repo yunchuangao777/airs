@@ -1,3 +1,5 @@
+import html
+
 import streamlit as st
 
 
@@ -20,23 +22,111 @@ def create_job_label(job: dict) -> str:
 
 def display_selected_job(selected_job: dict) -> None:
     st.markdown("### Selected Job")
-    col1, col2, col3 = st.columns(3)
 
-    with col1:
-        st.write(f"**Job title:** {selected_job.get('job_title') or 'Not available'}")
-        st.write(f"**Company:** {selected_job.get('company') or 'Not available'}")
+    info_col1, info_col2 = st.columns(2)
 
-    with col2:
-        st.write(f"**Location:** {selected_job.get('location') or 'Not available'}")
-        required_years = selected_job.get("required_experience_years")
-        experience_text = f"{required_years} years" if required_years is not None else "Not specified"
-        st.write(f"**Required experience:** {experience_text}")
+    with info_col1:
+        st.write(
+            f"**Job title:** "
+            f"{selected_job.get('job_title') or 'Not available'}"
+        )
+        st.write(
+            f"**Company:** "
+            f"{selected_job.get('company') or 'Not available'}"
+        )
 
-    with col3:
-        required_skills = selected_job.get("required_skills", [])
-        preferred_skills = selected_job.get("preferred_skills", [])
-        st.write(f"**Required skills:** {', '.join(required_skills) if required_skills else 'None'}")
-        st.write(f"**Preferred skills:** {', '.join(preferred_skills) if preferred_skills else 'None'}")
+    with info_col2:
+        st.write(
+            f"**Location:** "
+            f"{selected_job.get('location') or 'Not available'}"
+        )
+
+        required_years = selected_job.get(
+            "required_experience_years"
+        )
+        experience_text = (
+            f"{required_years} years"
+            if required_years is not None
+            else "Not specified"
+        )
+
+        st.write(
+            f"**Required experience:** {experience_text}"
+        )
+
+    required_skills = selected_job.get(
+        "required_skills",
+        [],
+    )
+    preferred_skills = selected_job.get(
+        "preferred_skills",
+        [],
+    )
+
+    def render_skill_box(
+        title: str,
+        skills: list[str],
+    ) -> None:
+        if skills:
+            items_html = "".join(
+                (
+                    "<li style='margin-bottom:0.35rem;'>"
+                    f"{html.escape(str(skill))}"
+                    "</li>"
+                )
+                for skill in skills
+            )
+        else:
+            items_html = (
+                "<div style='opacity:0.75;'>None</div>"
+            )
+
+        st.markdown(
+            f"""
+            <div style="
+                margin-top: 0.25rem;
+                margin-bottom: 0.5rem;
+            ">
+                <div style="
+                    font-weight: 600;
+                    margin-bottom: 0.4rem;
+                ">
+                    {html.escape(title)}
+                </div>
+                <div style="
+                    height: 130px;
+                    overflow-y: auto;
+                    padding: 0.75rem 0.9rem;
+                    border: 1px solid rgba(128, 128, 128, 0.35);
+                    border-radius: 0.5rem;
+                    background: rgba(128, 128, 128, 0.06);
+                    color: inherit;
+                ">
+                    <ul style="
+                        margin: 0;
+                        padding-left: 1.2rem;
+                    ">
+                        {items_html}
+                    </ul>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    skill_col1, skill_col2 = st.columns(2)
+
+    with skill_col1:
+        render_skill_box(
+            "Required skills",
+            required_skills,
+        )
+
+    with skill_col2:
+        render_skill_box(
+            "Preferred skills",
+            preferred_skills,
+        )
 
 
 def build_result_row(result) -> dict:

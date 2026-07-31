@@ -99,6 +99,39 @@ def render_interview_package(package) -> None:
 def _render_header(package) -> None:
     content = package.generated_content
 
+    st.markdown(
+        """
+        <style>
+        [class*="st-key-interview_brief_card"] {
+            border: 3px solid rgba(46, 125, 90, 0.75) !important;
+            border-radius: 14px !important;
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(46, 125, 90, 0.055),
+                    rgba(46, 125, 90, 0.015)
+                ) !important;
+            box-shadow:
+                0 4px 14px rgba(0, 0, 0, 0.12) !important;
+            padding: 0.45rem 0.65rem 0.65rem 0.65rem !important;
+            margin-bottom: 1rem !important;
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                transform 0.2s ease !important;
+        }
+
+        [class*="st-key-interview_brief_card"]:hover {
+            border-color: rgba(28, 105, 67, 1) !important;
+            box-shadow:
+                0 7px 20px rgba(0, 0, 0, 0.18) !important;
+            transform: translateY(-2px);
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     candidate_name = (
         package.candidate_name
         or "Unknown Candidate"
@@ -111,7 +144,10 @@ def _render_header(package) -> None:
 
     company = package.company or ""
 
-    with st.container(border=True):
+    with st.container(
+        border=True,
+        key="interview_brief_card",
+    ):
         header_col1, header_col2 = st.columns(
             [3, 2]
         )
