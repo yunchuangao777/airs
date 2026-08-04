@@ -9,9 +9,20 @@ import yaml
 from yaml.loader import SafeLoader
 
 from services.permission_service import require_permission
+import os
 
-
-AUTH_CONFIG_PATH = Path("config/auth_config.yaml")
+AUTH_CONFIG_PATH = Path(
+    os.getenv(
+        "AIRS_AUTH_CONFIG_PATH",
+        (
+            "/etc/secrets/auth_config.yaml"
+            if Path(
+                "/etc/secrets/auth_config.yaml"
+            ).exists()
+            else "config/auth_config.yaml"
+        ),
+    )
+)
 
 VALID_ROLES = {
     "admin",

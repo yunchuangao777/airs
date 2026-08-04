@@ -6,9 +6,20 @@ import streamlit as st
 import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
+import os
 
-
-AUTH_CONFIG_PATH = Path("config/auth_config.yaml")
+AUTH_CONFIG_PATH = Path(
+    os.getenv(
+        "AIRS_AUTH_CONFIG_PATH",
+        (
+            "/etc/secrets/auth_config.yaml"
+            if Path(
+                "/etc/secrets/auth_config.yaml"
+            ).exists()
+            else "config/auth_config.yaml"
+        ),
+    )
+)
 
 
 def load_auth_config(
