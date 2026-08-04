@@ -12,6 +12,7 @@ from services.ai_recruiter_tools import (
     get_pipeline_summary,
     get_recruitment_overview,
     search_candidates,
+    search_external_candidates,
     search_jobs,
 )
 
@@ -34,20 +35,26 @@ interviews, or evaluations.
 
 Important rules:
 1. Use tools whenever the answer depends on AIRS data.
-2. Never claim that you changed AIRS data. This version is read-only.
-3. Do not expose password hashes, authentication configuration,
+2. Use search_candidates for existing AIRS records. Use
+   search_external_candidates only when the recruiter explicitly asks
+   to search public or external sources or discover new prospects.
+3. Never claim that you changed AIRS data. This version is read-only.
+4. Do not expose password hashes, authentication configuration,
    candidate access tokens, public interview links, raw CV text,
    full phone numbers, or private street addresses.
-4. When the data is missing or ambiguous, say so clearly.
-5. When referring to a candidate, include the candidate name and,
+5. When the data is missing or ambiguous, say so clearly.
+6. Clearly label web-search results as unverified external prospects,
+   not AIRS candidates. Include source URLs when useful and never
+   imply that AIRS verified a person's identity, experience, or skills.
+7. When referring to an AIRS candidate, include the candidate name and,
    when useful, the candidate ID so the recruiter can identify the
    correct record.
-6. Treat match scores and interview evaluations as decision support,
+8. Treat match scores and interview evaluations as decision support,
    not as the sole basis for employment decisions.
-7. Keep answers readable. Use short headings and compact bullets when
+9. Keep answers readable. Use short headings and compact bullets when
    several records are returned.
-8. Do not infer protected personal characteristics.
-9. If a user asks you to perform an action, explain that this version
+10. Do not infer protected personal characteristics.
+11. If a user asks you to perform an action, explain that this version
    can only analyze data and may propose a next step for confirmation.
 """.strip()
 
@@ -141,6 +148,90 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
                 "job_id",
                 "status",
                 "minimum_match_score",
+                "limit",
+            ],
+            "additionalProperties": False,
+        },
+        "strict": True,
+    },
+    {
+        "type": "function",
+        "name": "search_external_candidates",
+        "description": (
+            "Search enabled external candidate sources such as Public "
+            "Web and, when implemented, GitHub. Use this only when the "
+            "recruiter explicitly asks to search externally, search "
+            "public sources, discover new prospects, or look beyond "
+            "the AIRS candidate database. Results are unverified "
+            "external prospects and are never imported automatically."
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query_text": {
+                    "type": "string",
+                    "description": (
+                        "Concise external candidate-search query, "
+                        "including role or professional focus."
+                    ),
+                },
+                "source_ids": {
+                    "type": ["array", "null"],
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "public_web",
+                            "github",
+                        ],
+                    },
+                    "description": (
+                        "External source IDs to search, or null to "
+                        "use the default configured external sources."
+                    ),
+                },
+                "location": {
+                    "type": ["string", "null"],
+                    "description": (
+                        "Location keyword such as Toronto or Canada."
+                    ),
+                },
+                "skills": {
+                    "type": ["array", "null"],
+                    "items": {"type": "string"},
+                    "description": (
+                        "Requested skills such as Python, FastAPI, "
+                        "CPA, SAP, or Power BI."
+                    ),
+                },
+                "minimum_experience": {
+                    "type": ["number", "null"],
+                    "description": (
+                        "Requested minimum years of experience."
+                    ),
+                },
+                "education": {
+                    "type": ["string", "null"],
+                    "description": (
+                        "Optional education, certification, or major."
+                    ),
+                },
+                "limit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 20,
+                    "description": (
+                        "Maximum prospects to return per configured "
+                        "source."
+                    ),
+                },
+            },
+            "required": [
+                "query_text",
+                "source_ids",
+                "location",
+                "skills",
+                "minimum_experience",
+                "education",
                 "limit",
             ],
             "additionalProperties": False,
@@ -269,6 +360,9 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
 TOOL_FUNCTIONS: dict[str, Callable[..., dict]] = {
     "get_recruitment_overview": get_recruitment_overview,
     "search_candidates": search_candidates,
+    "search_external_candidates": (
+        search_external_candidates
+    ),
     "get_candidate_details": get_candidate_details,
     "search_jobs": search_jobs,
     "get_pipeline_summary": get_pipeline_summary,

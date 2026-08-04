@@ -34,6 +34,9 @@ from ui_pages.user_management import (
 from ui_pages.ai_recruiter import (
     render_ai_recruiter,
 )
+from ui_pages.candidate_source_settings import (
+    render_candidate_source_settings,
+)
 
 DEFAULT_PAGE = "Dashboard"
 
@@ -125,6 +128,14 @@ def render_sidebar(
             page_name="User Management",
         )
 
+    if can_access_page(
+        "Candidate Source Settings"
+    ):
+        render_nav_button(
+            display_name="Candidate Source Settings",
+            page_name="Candidate Source Settings",
+        )
+        
     # render_nav_button(
         # display_name="AI Interview",
         # page_name="AI Interview",
@@ -177,6 +188,9 @@ def render_page(page: str) -> None:
 
     elif page == "AI Recruiter":
         render_ai_recruiter()
+
+    elif page == "Candidate Source Settings":
+        render_candidate_source_settings()
 
     else:
         st.error(f"Unknown page: {page}")

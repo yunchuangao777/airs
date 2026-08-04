@@ -1,0 +1,16 @@
+{
+    "application_id": "e9710055-705b-4dac-8053-fcb1c8ce8466",
+    "candidate_id": "34cd4286-0ab7-48bd-9e95-83f41124d7c2",
+    "job_id": "84523473-c460-4da3-a35d-0b7a4f58839a",
+    "status": "none",
+    "created_time": "2026-08-04T13:34:35",
+    "updated_time": "2026-08-04T13:34:35",
+    "notes": null,
+    "status_history": [
+        {
+            "status": "none",
+            "changed_time": "2026-08-04T13:34:35",
+            "note": "Application record created"
+        }
+    ]
+}

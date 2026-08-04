@@ -14,6 +14,12 @@ from services.permission_service import (
     has_permission,
     require_permission,
 )
+from components.external_candidate_import import (
+    render_url_candidate_import,
+)
+from components.linkedin_pdf_import import (
+    render_linkedin_pdf_import,
+)
 
 def text_to_list(value: str) -> list[str]:
     """
@@ -439,10 +445,17 @@ def show_create_candidate_dialog() -> None:
         ),
     )
 
-    upload_tab, manual_tab = st.tabs(
+    (
+        upload_tab,
+        manual_tab,
+        url_tab,
+        linkedin_tab,
+    ) = st.tabs(
         [
             "Upload CV",
-            "Fill in Fields",
+            "Manual Entry",
+            "Import from URL",
+            "LinkedIn PDF",
         ]
     )
 
@@ -451,3 +464,9 @@ def show_create_candidate_dialog() -> None:
 
     with manual_tab:
         render_manual_candidate()
+
+    with url_tab:
+        render_url_candidate_import()
+
+    with linkedin_tab:
+        render_linkedin_pdf_import()

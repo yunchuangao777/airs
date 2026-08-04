@@ -1,0 +1,44 @@
+sources:
+  internal_airs:
+    enabled: true
+    display_name: AIRS Candidate Database
+    source_type: internal
+    description: Search candidates already stored in AIRS.
+
+  public_web:
+    enabled: true
+    display_name: Public Resumes and Portfolios
+    source_type: tavily
+    description: Search public resumes, CV PDFs, personal websites, and portfolios.
+    allowed_content:
+      - resume
+      - cv
+      - portfolio
+      - personal_website
+    excluded_domains:
+      - linkedin.com
+      - www.linkedin.com
+      - indeed.com
+      - www.indeed.com
+      - monster.com
+      - www.monster.com
+      - facebook.com
+      - www.facebook.com
+      - instagram.com
+      - www.instagram.com
+      - x.com
+      - twitter.com
+
+  github:
+    enabled: true
+    display_name: GitHub Public Profiles
+    source_type: github
+    description: Search public GitHub users and repositories for technical-role discovery.
+    search_users: true
+    search_repositories: true
+
+settings:
+  maximum_results_per_source: 10
+  require_import_confirmation: true
+  require_authorization_confirmation: true
+  save_search_history: false

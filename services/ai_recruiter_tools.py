@@ -12,6 +12,13 @@ from match_loader import (
 import json
 from pathlib import Path
 
+from services.candidate_discovery.discovery_service import (
+    discover_candidates,
+)
+from services.candidate_discovery.models import (
+    CandidateDiscoveryQuery,
+)
+
 INTERVIEW_SESSION_DIR = Path("outputs/interview_sessions")
 
 
@@ -573,4 +580,149 @@ def get_interview_summary(
     return {
         "count": len(sessions),
         "sessions": sessions,
+    }
+
+
+def search_external_candidates(
+    *,
+    query_text: str,
+    source_ids: list[str] | None = None,
+    location: str | None = None,
+    skills: list[str] | None = None,
+    minimum_experience: float | None = None,
+    education: str | None = None,
+    limit: int = 10,
+) -> dict:
+    """
+    Search configured candidate-discovery sources.
+
+    External prospects remain separate from AIRS
+    candidates. This tool never imports or saves them.
+    """
+    clean_source_ids = [
+        _lower(source_id)
+        for source_id in (
+            source_ids
+            or ["public_web", "github"]
+        )
+        if _lower(source_id)
+    ]
+
+    # Internal AIRS records already have a dedicated
+    # search_candidates tool. Keep this tool focused on
+    # configured external discovery sources.
+    clean_source_ids = [
+        source_id
+        for source_id in clean_source_ids
+        if source_id != "internal_airs"
+    ]
+
+    if not clean_source_ids:
+        clean_source_ids = [
+            "public_web",
+        ]
+
+    query = CandidateDiscoveryQuery(
+        query_text=_text(query_text),
+        location=(
+            _text(location)
+            or None
+        ),
+        skills=[
+            _text(skill)
+            for skill in (skills or [])
+            if _text(skill)
+        ],
+        minimum_experience=(
+            minimum_experience
+        ),
+        education=(
+            _text(education)
+            or None
+        ),
+        limit=max(
+            1,
+            min(
+                int(limit or 10),
+                50,
+            ),
+        ),
+    )
+
+    response = discover_candidates(
+        query,
+        source_ids=clean_source_ids,
+    )
+
+    payload = response.to_dict()
+
+    compact_results = []
+
+    for result in payload.get(
+        "results",
+        [],
+    ):
+        compact_results.append(
+            {
+                "source_id": result.get(
+                    "source_id"
+                ),
+                "source_type": result.get(
+                    "source_type"
+                ),
+                "external_id": result.get(
+                    "external_id"
+                ),
+                "name": result.get("name"),
+                "title": result.get("title"),
+                "location": result.get(
+                    "location"
+                ),
+                "skills": result.get(
+                    "skills",
+                    [],
+                ),
+                "summary": result.get(
+                    "summary"
+                ),
+                "profile_url": result.get(
+                    "profile_url"
+                ),
+                "evidence": result.get(
+                    "evidence",
+                    [],
+                ),
+                "confidence": result.get(
+                    "confidence"
+                ),
+                "import_supported": result.get(
+                    "import_supported",
+                    False,
+                ),
+                "already_in_airs": result.get(
+                    "already_in_airs",
+                    False,
+                ),
+            }
+        )
+
+    return {
+        "query": payload.get("query"),
+        "searched_sources": clean_source_ids,
+        "enabled_source_ids": payload.get(
+            "enabled_source_ids",
+            [],
+        ),
+        "count": len(compact_results),
+        "prospects": compact_results,
+        "source_errors": payload.get(
+            "source_errors",
+            {},
+        ),
+        "important_note": (
+            "These are unverified external prospects. "
+            "A recruiter must review the source and "
+            "confirm import before AIRS creates a "
+            "candidate record."
+        ),
     }

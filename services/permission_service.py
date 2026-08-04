@@ -46,6 +46,10 @@ ROLE_PERMISSIONS: dict[str, set[str]] = {
 
         # Administration
         "user.manage",
+
+        # Ecternal source
+        "page.candidate_source_settings",
+        "candidate_sources.manage",
     },
 
     "recruiter": {
@@ -138,6 +142,7 @@ PAGE_PERMISSION_MAP: dict[str, str] = {
     "Interview Session": "page.interview_session",
     "User Management": "page.user_management",
     "AI Recruiter": "page.ai_recruiter",
+    "Candidate Source Settings": "page.candidate_source_settings",
 }
 
 

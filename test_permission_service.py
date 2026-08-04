@@ -31,6 +31,41 @@ def main() -> None:
         role="admin",
     )
 
+    assert can_access_page(
+        "Candidate Source Settings",
+        role="admin",
+    )
+
+    assert not can_access_page(
+        "Candidate Source Settings",
+        role="recruiter",
+    )
+
+    assert not can_access_page(
+        "Candidate Source Settings",
+        role="interviewer",
+    )
+
+    assert not can_access_page(
+        "Candidate Source Settings",
+        role="viewer",
+    )
+
+    assert has_permission(
+        "candidate_sources.manage",
+        role="admin",
+    )
+
+    assert not has_permission(
+        "candidate_sources.manage",
+        role="recruiter",
+    )
+
+    assert not has_permission(
+        "candidate_sources.manage",
+        role="viewer",
+    )
+
     print("Admin pages:")
     print(get_allowed_pages("admin"))
 
