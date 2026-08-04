@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import streamlit as st
 
+from services.permission_service import has_permission, require_permission
+
 from services.interview_package_service import (
     InterviewPackage,
 )
@@ -175,6 +177,9 @@ def render_existing_questions_form(
     """
     Render selection and editing controls for all questions.
     """
+    can_edit_questions = has_permission(
+        "interview.create"
+    )
     if not question_set.questions:
         st.info(
             "No questions are available in this "
@@ -219,6 +224,7 @@ def render_existing_questions_form(
                 selected = st.checkbox(
                     "Include in final interview",
                     value=question.selected,
+                    disabled=not can_edit_questions,
                     key=(
                         f"question_selected_"
                         f"{editor_key}_"
@@ -230,6 +236,7 @@ def render_existing_questions_form(
                     "Question",
                     value=question.edited_question,
                     height=110,
+                    disabled=not can_edit_questions,
                     key=(
                         f"question_text_"
                         f"{editor_key}_"
@@ -273,10 +280,13 @@ def render_existing_questions_form(
             "Save Approved Question Set",
             type="primary",
             use_container_width=True,
+            disabled=not can_edit_questions,
         )
 
     if not save_clicked:
         return
+
+    require_permission("interview.create")
 
     empty_selected_questions: list[str] = []
 
@@ -326,6 +336,9 @@ def render_add_custom_question(
     """
     Render the recruiter-created question form.
     """
+    can_edit_questions = has_permission(
+        "interview.create"
+    )
     st.markdown("### Add New Question")
 
     with st.expander(
@@ -338,6 +351,7 @@ def render_add_custom_question(
         ):
             question_text = st.text_area(
                 "Question *",
+                disabled=not can_edit_questions,
                 placeholder=(
                     "Example: What would your priorities "
                     "be during your first 90 days?"
@@ -353,6 +367,7 @@ def render_add_custom_question(
                 category = st.selectbox(
                     "Category",
                     options=CATEGORY_OPTIONS,
+                    disabled=not can_edit_questions,
                     index=9,
                     format_func=format_category,
                 )
@@ -360,6 +375,7 @@ def render_add_custom_question(
             with custom_col2:
                 competency = st.text_input(
                     "Competency",
+                    disabled=not can_edit_questions,
                     placeholder=(
                         "Example: Role Planning"
                     ),
@@ -367,6 +383,7 @@ def render_add_custom_question(
 
             reason = st.text_area(
                 "Why ask this question?",
+                disabled=not can_edit_questions,
                 placeholder=(
                     "Optional explanation of what "
                     "the question should assess."
@@ -378,10 +395,15 @@ def render_add_custom_question(
                 "Add Question",
                 type="primary",
                 use_container_width=True,
+                disabled=not can_edit_questions,
             )
 
     if not add_clicked:
         return
+
+    require_permission(
+        "interview.create"
+    )
 
     if not question_text.strip():
         st.error(

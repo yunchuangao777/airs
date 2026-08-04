@@ -1,5 +1,7 @@
 import streamlit as st
 
+from services.permission_service import has_permission, require_permission
+
 from components.matching.application_selector import render_candidate_application_selection
 from components.matching.results import display_matching_results
 from components.matching.utils import build_result_row, result_state_key
@@ -17,7 +19,15 @@ def render_ai_matching(candidates: list[dict], selected_job: dict) -> None:
     job_id = selected_job.get("job_id")
     state_key = result_state_key("ai", job_id)
 
-    if st.button("Run AI Matching", type="primary", key=f"run_ai_matching_{job_id}"):
+    can_run_matching = has_permission("matching.run")
+
+    if st.button(
+        "Run AI Matching",
+        type="primary",
+        key=f"run_ai_matching_{job_id}",
+        disabled=not can_run_matching,
+    ):
+        require_permission("matching.run")
         rows = []
         progress = st.progress(0)
         status = st.empty()

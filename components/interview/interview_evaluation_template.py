@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import streamlit as st
 
+from services.permission_service import has_permission, require_permission
+
 from services.interview_evaluation_service import (
     InterviewEvaluationTemplate,
     add_custom_criterion,
@@ -93,6 +95,9 @@ def render_existing_criteria(
     template: InterviewEvaluationTemplate,
     editor_key: str,
 ) -> None:
+    can_edit_template = has_permission(
+        "interview.create"
+    )
     st.markdown("### Evaluation Criteria")
 
     st.caption(
@@ -127,6 +132,7 @@ def render_existing_criteria(
                 selected = st.checkbox(
                     "Include in evaluation",
                     value=criterion.selected,
+                    disabled=not can_edit_template,
                     key=(
                         f"evaluation_selected_"
                         f"{editor_key}_"
@@ -137,6 +143,7 @@ def render_existing_criteria(
                 competency = st.text_input(
                     "Competency",
                     value=criterion.competency,
+                    disabled=not can_edit_template,
                     key=(
                         f"evaluation_competency_"
                         f"{editor_key}_"
@@ -148,6 +155,7 @@ def render_existing_criteria(
                     "Description",
                     value=criterion.description,
                     height=90,
+                    disabled=not can_edit_template,
                     key=(
                         f"evaluation_description_"
                         f"{editor_key}_"
@@ -158,6 +166,7 @@ def render_existing_criteria(
                 weight = st.number_input(
                     "Weight (%)",
                     min_value=0,
+                    disabled=not can_edit_template,
                     max_value=100,
                     value=int(
                         criterion.weight
@@ -192,10 +201,13 @@ def render_existing_criteria(
             "Save Evaluation Template",
             type="primary",
             use_container_width=True,
+            disabled=not can_edit_template,
         )
 
     if not save_clicked:
         return
+
+    require_permission("interview.create")
 
     validation_errors: list[str] = []
 
@@ -254,6 +266,10 @@ def render_add_custom_criterion(
     template: InterviewEvaluationTemplate,
     editor_key: str,
 ) -> None:
+    can_edit_template = has_permission(
+        "interview.create"
+    )
+
     st.markdown("### Add Evaluation Criterion")
 
     with st.expander(
@@ -266,6 +282,7 @@ def render_add_custom_criterion(
         ):
             competency = st.text_input(
                 "Competency *",
+                disabled=not can_edit_template,
                 placeholder=(
                     "Example: Stakeholder Management"
                 ),
@@ -273,6 +290,7 @@ def render_add_custom_criterion(
 
             description = st.text_area(
                 "Description",
+                disabled=not can_edit_template,
                 placeholder=(
                     "Describe what should be assessed."
                 ),
@@ -282,6 +300,7 @@ def render_add_custom_criterion(
             weight = st.number_input(
                 "Weight (%)",
                 min_value=0,
+                disabled=not can_edit_template,
                 max_value=100,
                 value=10,
                 step=5,
@@ -291,10 +310,15 @@ def render_add_custom_criterion(
                 "Add Criterion",
                 type="primary",
                 use_container_width=True,
+                disabled=not can_edit_template,
             )
 
     if not add_clicked:
         return
+
+    require_permission(
+        "interview.create"
+    )
 
     try:
         criterion = add_custom_criterion(

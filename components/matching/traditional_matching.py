@@ -1,5 +1,7 @@
 import streamlit as st
 
+from services.permission_service import has_permission, require_permission
+
 from components.matching.application_selector import render_candidate_application_selection
 from components.matching.results import display_matching_results
 from components.matching.utils import build_result_row, result_state_key, text_to_list
@@ -75,12 +77,18 @@ def render_traditional_matching(candidates: list[dict], selected_job: dict) -> N
             "They will be normalized automatically."
         )
 
+    can_run_matching = has_permission("matching.run")
+
     if st.button(
         "Run Rule Matching",
         type="primary",
-        disabled=total_weight == 0,
+        disabled=(
+            total_weight == 0
+            or not can_run_matching
+        ),
         key=f"run_traditional_matching_{job_id}",
     ):
+        require_permission("matching.run")
         required_skills = text_to_list(required_skills_text)
         preferred_skills = text_to_list(preferred_skills_text)
         education_keywords = text_to_list(education_keywords_text)

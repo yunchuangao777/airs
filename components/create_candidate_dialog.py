@@ -10,7 +10,10 @@ from cv_saver import save_candidate_json
 from llm_extractor import extract_cv_info
 from schema import CVInfo
 from utils.file_helpers import save_uploaded_files
-
+from services.permission_service import (
+    has_permission,
+    require_permission,
+)
 
 def text_to_list(value: str) -> list[str]:
     """
@@ -89,8 +92,19 @@ def render_upload_candidate() -> None:
         type="primary",
         use_container_width=True,
         key="create_candidate_upload_submit",
+        disabled=not has_permission(
+            "candidate.create"
+        ),
     ):
         return
+
+    require_permission(
+        "candidate.create",
+        message=(
+            "You do not have permission to upload "
+            "or create candidate records."
+        ),
+    )
 
     saved_paths = save_uploaded_files(
         uploaded_files
@@ -299,10 +313,21 @@ def render_manual_candidate() -> None:
             "Create Candidate",
             type="primary",
             use_container_width=True,
+            disabled=not has_permission(
+                "candidate.create"
+            ),
         )
 
     if not submitted:
         return
+
+    require_permission(
+        "candidate.create",
+        message=(
+            "You do not have permission to create "
+            "candidate records."
+        ),
+    )
 
     if not name.strip():
         st.warning("Candidate name is required.")
@@ -406,6 +431,14 @@ def render_manual_candidate() -> None:
     width="large",
 )
 def show_create_candidate_dialog() -> None:
+    require_permission(
+        "candidate.create",
+        message=(
+            "You do not have permission to create "
+            "candidate records."
+        ),
+    )
+
     upload_tab, manual_tab = st.tabs(
         [
             "Upload CV",

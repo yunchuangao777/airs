@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import streamlit as st
 
+from services.permission_service import has_permission, require_permission
+
 from services.interview_session_service import (
     InterviewSession,
     calculate_weighted_evaluation_score,
@@ -163,6 +165,10 @@ def render_interview_evidence(
 def render_evaluation_form(
     session: InterviewSession,
 ) -> None:
+    can_evaluate = has_permission(
+        "interview.evaluate"
+    )
+
     evaluation_locked = (
         session.evaluation_status
         == "completed"
@@ -230,7 +236,10 @@ def render_evaluation_form(
                         f"{session.session_id}_"
                         f"{criterion.criterion_id}"
                     ),
-                    disabled=evaluation_locked,
+                    disabled=(
+                        evaluation_locked
+                        or not can_evaluate
+                    ),
                 )
 
                 comments = st.text_area(
@@ -247,7 +256,10 @@ def render_evaluation_form(
                         f"{session.session_id}_"
                         f"{criterion.criterion_id}"
                     ),
-                    disabled=evaluation_locked,
+                    disabled=(
+                        evaluation_locked
+                        or not can_evaluate
+                    ),
                 )
 
                 criterion_values.append(
@@ -275,7 +287,10 @@ def render_evaluation_form(
                 f"evaluation_summary_"
                 f"{session.session_id}"
             ),
-            disabled=evaluation_locked,
+            disabled=(
+                evaluation_locked
+                or not can_evaluate
+            ),
         )
 
         current_recommendation_index = (
@@ -300,7 +315,10 @@ def render_evaluation_form(
                 f"evaluation_recommendation_"
                 f"{session.session_id}"
             ),
-            disabled=evaluation_locked,
+            disabled=(
+                evaluation_locked
+                or not can_evaluate
+            ),
         )
 
         if evaluation_locked:
@@ -314,10 +332,13 @@ def render_evaluation_form(
                 "Save Evaluation Draft",
                 type="primary",
                 use_container_width=True,
+                disabled=not can_evaluate,
             )
 
     if not save_clicked:
         return
+
+    require_permission("interview.evaluate")
 
     try:
         update_session_evaluation(
@@ -344,6 +365,9 @@ def render_evaluation_form(
 def render_finalize_evaluation(
     session: InterviewSession,
 ) -> None:
+    can_finalize = has_permission(
+        "interview.finalize"
+    )
     st.markdown("### Finalize Evaluation")
 
     if session.evaluation_status == "completed":
@@ -417,6 +441,7 @@ def render_finalize_evaluation(
         disabled=(
             not confirm_finalize
             or bool(missing_items)
+            or not can_finalize
         ),
         key=(
             f"finalize_evaluation_"
@@ -426,6 +451,8 @@ def render_finalize_evaluation(
 
     if not finalize_clicked:
         return
+
+    require_permission("interview.finalize")
 
     try:
         complete_session_evaluation(

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import streamlit as st
 
+from services.permission_service import has_permission, require_permission
+
 from services.interview_session_service import (
     InterviewSession,
     complete_interview_session,
@@ -361,6 +363,10 @@ def render_current_question(
         f"{question.question_id}"
     )
 
+    can_conduct = has_permission(
+        "interview.conduct"
+    )
+
     answer_text = st.text_area(
         "Candidate Answer",
         value=question.answer_text,
@@ -369,7 +375,10 @@ def render_current_question(
             "Record the candidate's response here..."
         ),
         key=answer_key,
-        disabled=session.status == "completed",
+        disabled=(
+            session.status == "completed"
+            or not can_conduct
+        ),
     )
 
     interviewer_notes = st.text_area(
@@ -381,7 +390,10 @@ def render_current_question(
             "or follow-up points..."
         ),
         key=notes_key,
-        disabled=session.status == "completed",
+        disabled=(
+            session.status == "completed"
+            or not can_conduct
+        ),
     )
 
     if session.status == "completed":
@@ -399,7 +411,10 @@ def render_current_question(
                 f"{session.session_id}_"
                 f"{question.question_id}"
             ),
-            disabled=question_index == 0,
+            disabled=(
+                question_index == 0
+                or not can_conduct
+            ),
             use_container_width=True,
         )
 
@@ -412,6 +427,7 @@ def render_current_question(
                 f"{question.question_id}"
             ),
             use_container_width=True,
+            disabled=not can_conduct,
         )
 
     with next_col:
@@ -435,9 +451,11 @@ def render_current_question(
                 f"{question.question_id}"
             ),
             use_container_width=True,
+            disabled=not can_conduct,
         )
 
     if previous_clicked:
+        require_permission("interview.conduct")
         save_current_question(
             session=session,
             question_index=question_index,
@@ -460,6 +478,7 @@ def render_current_question(
         st.rerun()
 
     if save_clicked:
+        require_permission("interview.conduct")
         save_current_question(
             session=session,
             question_index=question_index,
@@ -476,6 +495,7 @@ def render_current_question(
         st.rerun()
 
     if next_clicked:
+        require_permission("interview.conduct")
         save_current_question(
             session=session,
             question_index=question_index,
@@ -502,6 +522,7 @@ def render_current_question(
 def render_overall_notes(
     session: InterviewSession,
 ) -> None:
+    can_conduct = has_permission("interview.conduct")
     st.markdown("### Overall Interview Notes")
 
     notes_key = (
@@ -519,7 +540,10 @@ def render_overall_notes(
         ),
         label_visibility="collapsed",
         key=notes_key,
-        disabled=session.status == "completed",
+        disabled=(
+            session.status == "completed"
+            or not can_conduct
+        ),
     )
 
     if session.status == "completed":
@@ -531,7 +555,9 @@ def render_overall_notes(
             f"save_overall_notes_"
             f"{session.session_id}"
         ),
+        disabled=not can_conduct,
     ):
+        require_permission("interview.conduct")
         session.overall_notes = (
             overall_notes.strip()
         )
@@ -548,6 +574,7 @@ def render_overall_notes(
 def render_completion_section(
     session: InterviewSession,
 ) -> None:
+    can_conduct = has_permission("interview.conduct")
     st.markdown("### Complete Interview")
 
     answered_count = get_answered_count(session)
@@ -589,7 +616,10 @@ def render_completion_section(
     complete_clicked = st.button(
         "Complete Interview",
         type="primary",
-        disabled=not confirm_complete,
+        disabled=(
+            not confirm_complete
+            or not can_conduct
+        ),
         key=(
             f"complete_session_"
             f"{session.session_id}"
@@ -598,6 +628,7 @@ def render_completion_section(
     )
 
     if complete_clicked:
+        require_permission("interview.conduct")
         complete_interview_session(session)
 
         st.session_state[
@@ -628,7 +659,11 @@ def render_interview_session_runner(
             "approved questions and evaluation criteria."
         )
 
-        if st.button(
+        can_conduct = has_permission(
+            "interview.conduct"
+        )
+
+        start_clicked = st.button(
             "Start Interview",
             type="primary",
             key=(
@@ -636,7 +671,26 @@ def render_interview_session_runner(
                 f"{session.session_id}"
             ),
             use_container_width=True,
-        ):
+            disabled=not can_conduct,
+            help=(
+                None
+                if can_conduct
+                else (
+                    "Your role has read-only access "
+                    "to interview sessions."
+                )
+            ),
+        )
+
+        if start_clicked:
+            require_permission(
+                "interview.conduct",
+                message=(
+                    "You do not have permission to "
+                    "start or conduct interviews."
+                ),
+            )
+
             start_interview_session(session)
 
             st.session_state[

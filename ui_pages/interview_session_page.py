@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import streamlit as st
 
+from services.permission_service import has_permission, require_permission
+
 from components.interview.interview_session_runner import (
     render_interview_session_runner,
 )
@@ -330,9 +332,13 @@ def render_interview_session_page() -> None:
         )
 
         with create_col:
+            can_create_session = has_permission(
+                "interview.create"
+            )
             create_new_clicked = st.button(
                 "Create New Session",
                 use_container_width=True,
+                disabled=not can_create_session,
             )
 
         with info_col:
@@ -343,6 +349,7 @@ def render_interview_session_page() -> None:
             )
 
         if create_new_clicked:
+            require_permission("interview.create")
             try:
 
                 new_session = create_interview_session(
@@ -386,11 +393,17 @@ def render_interview_session_page() -> None:
             "this candidate and job."
         )
 
+        can_create_session = has_permission(
+            "interview.create"
+        )
+
         if st.button(
             "Create Interview Session",
             type="primary",
             use_container_width=True,
+            disabled=not can_create_session,
         ):
+            require_permission("interview.create")
             try:
 
                 new_session = create_interview_session(

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import streamlit as st
 
+from services.permission_service import has_permission, require_permission
+
 from application_service import (
     update_application_status,
 )
@@ -337,6 +339,10 @@ def show_candidate_status_dialog(
             )
         )
 
+        can_update_status = has_permission(
+            "application.update_status"
+        )
+
         status_options = EDITABLE_STATUSES
 
         default_index = 0
@@ -355,6 +361,7 @@ def show_candidate_status_dialog(
                 f"hiring_status_"
                 f"{job_id}_{candidate_id}"
             ),
+            disabled=not can_update_status,
         )
 
         status_note = st.text_area(
@@ -368,6 +375,7 @@ def show_candidate_status_dialog(
                 f"hiring_status_note_"
                 f"{job_id}_{candidate_id}"
             ),
+            disabled=not can_update_status,
         )
 
         status_changed = (
@@ -384,12 +392,18 @@ def show_candidate_status_dialog(
             "Update Status",
             type="primary",
             use_container_width=True,
-            disabled=not status_changed,
+            disabled=(
+                not status_changed
+                or not can_update_status
+            ),
             key=(
                 f"hiring_update_status_"
                 f"{job_id}_{candidate_id}"
             ),
         ):
+            require_permission(
+                "application.update_status"
+            )
             try:
                 updated_application = (
                     update_application_status(

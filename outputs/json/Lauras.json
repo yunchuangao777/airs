@@ -1,0 +1,62 @@
+{
+    "candidate_id": "07b20310-60c4-4ca4-8dc4-d18d6b290926",
+    "cv_hash": null,
+    "source_filename": "Lauras.txt",
+    "source_filepath": "uploads\\Lauras.txt",
+    "upload_time": null,
+    "raw_text": "LauraResume\nLaura, Wang Rong \n1992-01-08，Shanghai Mobile：15000977637 Email：laura920108@hotmail.com \nSummary \n. 8 years working experience in finance, including 4 years AR working experience in \nretail industry, experience in SAP system and E-commerce system. . Cheerful personality, good at communication, self-motivated, strong work stability. . Medium Level Accountant & CET 6 & CPA -Economic law& Audit \nVersace \nSenior Accountant-APAC IC 2022.08.29-till now . Responsible for Great China, Hong Kong, Macau and Taiwan sales and purchase \nbetween each foreign region. . Check logistics system (Stealth) for inventory, and issue debit/credit note, and invoices. . Prepare for Taiwan export declaration to audit. . Monthly check Tagetik system with each foreign region and Oracle entry from reporting \nteam. . Prepare SOX for inventory part and inter-company aging. . Responsible for leasing system (Costar), follow up APAC retail stores information, \nincluding new opening, termination, relocation, renewal, early termination, etc. . As a key user for SAP and Hyperion system go live \nJing An Kerry Center \nSenior accountant, 2019/09-2022.4.29 \n. Responsible for 120 tenants in the shopping mall on fixed rent, turnover rent, management fees and etc. Reconcile receivable balance on a timely basis in JDE system and issue VAT invoice. \n. Audit contract (new/renew/early termination leasing stores and pop up stores) . AR Aging report, consolidate and analysis revenue status to management level . Preparing closing reports, filing documentations with review and follow ups. \nUnderArmour \nOperation Accountant，2017/04-2019/09 \nRetail：\n. Responsible for 40 leasing stores and 40 consignment stores daily maintenance, accrual sales commissions and check with statement. \n. Check the revenue with retail system Prism and SAP, confirm inter-branch AR/AP invoice and credit memo. Produce aging report and follow up with the overdue reasons. \n. Deliver a training for new store manager on finance part. Ensuring that financial transactions are recorded in compliance with local and US GAAP regulation with full \nLauraResume\nSOX compliance. E-commerce：. Responsible for JD and T-mall. Interact with TP team to identify gaps between \nprocess and reality. . Monitoring month end closing with full reconciliation with customer/Baozun . Daily refund on Alipay, Wechat and PayPal. Others：\n. Attend SAP project go live, as super user on AR function to finish some tests. \nSwatch Group \nAccountant，2016/04-2017/04 \nDaily and closing：\n. Take charge of 30 normal store, reconcile and match bank receipt with open AR interfaced from store RMS into SAP timely. \n. Follow up open AR for the sales that consumer using shopping card with landlord, and collect the money within due date. \n. Reconcile store cash balance between RMS and SAP , and landlord’s statement with our booking on monthly basis. \n. Make monthly accrual for commission rental and any other expense. Follow up expense invoices with landlord, filing in time and collect money within due day. \nReporting：\n. Conduct commission rental analysis at month-end, ensure correct booking. Prepare balance sheet analysis for AR responsible accounts, clear up outstanding items. \n. Prepare AR aging report on regular basis, communicate with relevant person to learn the overdue reason. \nTax：\n. Conduct Monthly tax return including CT/BT/VAT & stamp duty purchase for responsible CFS & legal entity; \n. Prepare tax assessment package for non-trade remittance and withholding tax returns for related legal entities \n. Prepare tax reasonable test workings for related legal entities (every half year) \nModern Media Group \nAccountant，2014/04-2016/04 \n. Audit the operating costs, and control the risk of tax. \n. Prepare the settlement of account payables (including customer and overseas payment) \n. Responsible for asset booking, invoice verification, and run the monthly assets depreciation \n",
+    "name": "Laura Wang Rong",
+    "email": "laura920108@hotmail.com",
+    "phone": "15000977637",
+    "location": "Shanghai",
+    "summary": "8 years working experience in finance, including 4 years AR working experience in retail industry, experience in SAP system and E-commerce system. Cheerful personality, good at communication, self-motivated, strong work stability. Medium Level Accountant & CET 6 & CPA -Economic law& Audit",
+    "skills": [
+        "Finance",
+        "SAP",
+        "E-commerce",
+        "Communication",
+        "Accounting",
+        "Data Analysis",
+        "Audit",
+        "Tax"
+    ],
+    "education": [],
+    "work_experience": [
+        {
+            "company": "Versace",
+            "title": "Senior Accountant-APAC IC",
+            "start_date": "2022-08-29",
+            "end_date": "now",
+            "description": "Responsible for Great China, Hong Kong, Macau and Taiwan sales and purchase between each foreign region. Check logistics system (Stealth) for inventory, and issue debit/credit note, and invoices. Prepare for Taiwan export declaration to audit. Monthly check Tagetik system with each foreign region and Oracle entry from reporting team. Prepare SOX for inventory part and inter-company aging. Responsible for leasing system (Costar), follow up APAC retail stores information, including new opening, termination, relocation, renewal, early termination, etc. As a key user for SAP and Hyperion system go live."
+        },
+        {
+            "company": "Jing An Kerry Center",
+            "title": "Senior Accountant",
+            "start_date": "2019-09",
+            "end_date": "2022-04-29",
+            "description": "Responsible for 120 tenants in the shopping mall on fixed rent, turnover rent, management fees and etc. Reconcile receivable balance on a timely basis in JDE system and issue VAT invoice. Audit contract (new/renew/early termination leasing stores and pop up stores). AR Aging report, consolidate and analysis revenue status to management level. Preparing closing reports, filing documentations with review and follow ups."
+        },
+        {
+            "company": "UnderArmour",
+            "title": "Operation Accountant",
+            "start_date": "2017-04",
+            "end_date": "2019-09",
+            "description": "Responsible for 40 leasing stores and 40 consignment stores daily maintenance, accrual sales commissions and check with statement. Check the revenue with retail system Prism and SAP, confirm inter-branch AR/AP invoice and credit memo. Produce aging report and follow up with the overdue reasons. Deliver a training for new store manager on finance part. Ensuring that financial transactions are recorded in compliance with local and US GAAP regulation with full SOX compliance."
+        },
+        {
+            "company": "Swatch Group",
+            "title": "Accountant",
+            "start_date": "2016-04",
+            "end_date": "2017-04",
+            "description": "Take charge of 30 normal store, reconcile and match bank receipt with open AR interfaced from store RMS into SAP timely. Follow up open AR for the sales that consumer using shopping card with landlord, and collect the money within due date. Reconcile store cash balance between RMS and SAP , and landlord’s statement with our booking on monthly basis."
+        },
+        {
+            "company": "Modern Media Group",
+            "title": "Accountant",
+            "start_date": "2014-04",
+            "end_date": "2016-04",
+            "description": "Audit the operating costs, and control the risk of tax. Prepare the settlement of account payables (including customer and overseas payment). Responsible for asset booking, invoice verification, and run the monthly assets depreciation."
+        }
+    ],
+    "total_years_experience": 8.0
+}

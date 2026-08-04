@@ -1,5 +1,7 @@
 import streamlit as st
 
+from services.permission_service import has_permission
+
 from components.create_job_dialog import (
     show_create_job_dialog,
 )
@@ -21,11 +23,14 @@ def render_job_management():
     )
 
     with action_col:
+        can_create_job = has_permission("job.create")
+
         if st.button(
             "＋ Create Job",
             type="primary",
             use_container_width=True,
             key="open_create_job_dialog",
+            disabled=not can_create_job,
         ):
             show_create_job_dialog()
 

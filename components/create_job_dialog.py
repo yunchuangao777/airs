@@ -3,6 +3,8 @@ from datetime import datetime
 
 import streamlit as st
 
+from services.permission_service import require_permission
+
 from job_extractor import extract_job_info
 from job_loader import load_job_file
 from job_saver import save_job_json
@@ -33,6 +35,11 @@ def text_to_list(value: str) -> list[str]:
 
 @st.dialog("Create New Job", width="large")
 def show_create_job_dialog():
+    require_permission(
+        "job.create",
+        message="You do not have permission to create jobs.",
+    )
+
     input_method = st.radio(
         "Input method",
         [

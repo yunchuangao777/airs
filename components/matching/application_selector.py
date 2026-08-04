@@ -1,6 +1,8 @@
 import pandas as pd
 import streamlit as st
 
+from services.permission_service import has_permission, require_permission
+
 from application_loader import load_application
 from application_service import (
     add_candidate_as_applied_if_available,
@@ -201,7 +203,13 @@ def render_candidate_application_selection(
             f"and will be skipped: {skipped_names}"
         )
 
-    add_disabled = not candidates_available_to_add
+    can_update_status = has_permission(
+        "application.update_status"
+    )
+    add_disabled = (
+        not candidates_available_to_add
+        or not can_update_status
+    )
 
     button_label = (
         "Add Selected Candidates as Applied"
@@ -216,6 +224,9 @@ def render_candidate_application_selection(
         use_container_width=True,
         key=f"{section_key}_batch_add_as_applied",
     ):
+        require_permission(
+            "application.update_status"
+        )
         added_candidates = []
         skipped_candidates = []
         failed_candidates = []

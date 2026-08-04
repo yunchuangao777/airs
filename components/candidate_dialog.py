@@ -1,6 +1,8 @@
 import pandas as pd
 import streamlit as st
 
+from services.permission_service import has_permission, require_permission
+
 from match_loader import load_matches_by_candidate
 from utils.formatters import format_experience_years
 
@@ -192,6 +194,10 @@ def show_candidate_details(candidate: dict):
             application.status.value
         )
 
+        can_update_status = has_permission(
+            "application.update_status"
+        )
+
         selected_status = st.selectbox(
             "Candidate status",
             options=status_values,
@@ -201,6 +207,7 @@ def show_candidate_details(candidate: dict):
                 f"{candidate.get('candidate_id')}_"
                 f"{selected_job.get('job_id')}"
             ),
+            disabled=not can_update_status,
         )
 
         status_note = st.text_input(
@@ -210,6 +217,7 @@ def show_candidate_details(candidate: dict):
                 f"{candidate.get('candidate_id')}_"
                 f"{selected_job.get('job_id')}"
             ),
+            disabled=not can_update_status,
         )
 
         if st.button(
@@ -219,7 +227,11 @@ def show_candidate_details(candidate: dict):
                 f"{candidate.get('candidate_id')}_"
                 f"{selected_job.get('job_id')}"
             ),
+            disabled=not can_update_status,
         ):
+            require_permission(
+                "application.update_status"
+            )
             update_application_status(
                 candidate_id=candidate.get("candidate_id"),
                 job_id=selected_job.get("job_id"),

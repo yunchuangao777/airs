@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import streamlit as st
 
+from services.permission_service import has_permission, require_permission
+
 
 INTERVIEW_TYPES = {
     "Recruiter Screening": "recruiter_screening",
@@ -290,6 +292,10 @@ def render_interview_settings(
         else "Generate Interview Package"
     )
 
+    can_create_interview = has_permission(
+        "interview.create"
+    )
+
     generate_clicked = st.button(
         button_label,
         type="primary",
@@ -303,6 +309,8 @@ def render_interview_settings(
 
     if not generate_clicked:
         return None
+
+    require_permission("interview.create")
 
     settings = {
         "candidate_id": context.get(

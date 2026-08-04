@@ -16,3 +16,6 @@ env/
 .DS_Store
 Thumbs.db
 .env
+
+# Config
+config/auth_config.yaml

@@ -1,5 +1,7 @@
 import streamlit as st
 
+from services.permission_service import has_permission, require_permission
+
 from job_saver import delete_job_json, save_job_json
 from schema import JobInfo
 
@@ -49,6 +51,9 @@ def refresh_job_table():
 
 @st.dialog("Job Details", width="large")
 def show_job_details(job: dict):
+    can_edit_job = has_permission("job.edit")
+    can_delete_job = has_permission("job.delete")
+
     job_title = job.get("job_title") or "Untitled Job"
 
     st.subheader(job_title)
@@ -260,9 +265,11 @@ def show_job_details(job: dict):
                 "Save Changes",
                 type="primary",
                 use_container_width=True,
+                disabled=not can_edit_job,
             )
 
         if save_changes:
+            require_permission("job.edit")
             try:
                 updated_data = job.copy()
 
@@ -350,11 +357,15 @@ def show_job_details(job: dict):
             "Delete Job",
             type="primary",
             use_container_width=True,
-            disabled=confirmation.strip() != "DELETE",
+            disabled=(
+                confirmation.strip() != "DELETE"
+                or not can_delete_job
+            ),
             key=f"delete_job_{job.get('job_id')}",
         )
 
         if delete_clicked:
+            require_permission("job.delete")
             job_id = job.get("job_id")
 
             if not job_id:

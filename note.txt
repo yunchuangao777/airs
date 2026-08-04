@@ -1,0 +1,5 @@
+
+
+use this command when new users added to yaml:
+
+python -c "import secrets; print(secrets.token_urlsafe(48))"
