@@ -67,7 +67,14 @@ def _format_size(
 def _finish_candidate_creation(
     message: str,
 ) -> None:
-    st.session_state["candidate_table_version"] = (
+    
+    st.session_state[
+        "show_create_candidate_dialog"
+    ] = False
+
+    st.session_state[
+        "candidate_table_version"
+    ] = (
         st.session_state.get(
             "candidate_table_version",
             0,
@@ -75,9 +82,9 @@ def _finish_candidate_creation(
         + 1
     )
 
-    st.session_state["candidate_created_message"] = (
-        message
-    )
+    st.session_state[
+        "candidate_created_message"
+    ] = message
 
     st.rerun()
 
@@ -286,6 +293,11 @@ def _render_pending_candidate(
 
     if cancel_clicked:
         _clear_pending_import()
+
+        st.session_state[
+            "show_create_candidate_dialog"
+        ] = False
+
         st.rerun()
 
     if not save_clicked:

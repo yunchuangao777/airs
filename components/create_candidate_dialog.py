@@ -21,6 +21,10 @@ from components.linkedin_pdf_import import (
     render_linkedin_pdf_import,
 )
 
+CREATE_CANDIDATE_DIALOG_KEY = (
+    "show_create_candidate_dialog"
+)
+
 def text_to_list(value: str) -> list[str]:
     """
     Convert one-item-per-line or comma-separated text
@@ -436,6 +440,7 @@ def render_manual_candidate() -> None:
     "Create New Candidate",
     width="large",
 )
+
 def show_create_candidate_dialog() -> None:
     require_permission(
         "candidate.create",

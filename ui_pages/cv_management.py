@@ -47,14 +47,18 @@ def render_cv_management() -> None:
 
         if add_clicked:
             require_permission(
-                "candidate.create",
-                message=(
-                    "You do not have permission to "
-                    "create candidate records."
-                ),
+                "candidate.create"
             )
 
-            show_create_candidate_dialog()
+            st.session_state[
+                "show_create_candidate_dialog"
+            ] = True
+
+    if st.session_state.get(
+        "show_create_candidate_dialog",
+        False,
+    ):
+        show_create_candidate_dialog()
 
     # st.divider()
 
