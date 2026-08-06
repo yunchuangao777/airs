@@ -301,11 +301,11 @@ def render_candidate_source_settings() -> None:
         "search when discovering candidates."
     )
 
-    st.warning(
-        "External prospects remain separate from AIRS "
-        "candidates until a recruiter reviews and "
-        "confirms an import."
-    )
+    # st.warning(
+        # "External prospects remain separate from AIRS "
+        # "candidates until a recruiter reviews and "
+        # "confirms an import."
+    # )
 
     _show_saved_message()
 

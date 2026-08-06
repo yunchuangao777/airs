@@ -354,11 +354,11 @@ def render_user_management() -> None:
         ):
             show_add_user_dialog()
 
-    with info_col:
-        st.info(
-            "Accounts are created only by an administrator. "
-            "Public registration is not available."
-        )
+    # with info_col:
+        # st.info(
+            # "Accounts are created only by an administrator. "
+            # "Public registration is not available."
+        # )
 
     st.divider()
     st.markdown("### Users")

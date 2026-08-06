@@ -354,13 +354,13 @@ def render_ai_recruiter() -> None:
             _clear_chat()
             st.rerun()
 
-    st.info(
-        "AI Recruiter provides decision support only. "
-        "Review the underlying candidate and interview "
-        "records before making hiring decisions."
-    )
+    # st.info(
+        # "AI Recruiter provides decision support only. "
+        # "Review the underlying candidate and interview "
+        # "records before making hiring decisions."
+    # )
 
-    selected_prompt = _render_suggested_prompts()
+    selected_prompt = _render_suggested_prompts() 
 
     st.divider()
 
