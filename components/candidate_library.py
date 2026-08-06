@@ -116,6 +116,16 @@ def build_candidate_dataframe(
                 "Email": candidate.get("email") or "",
                 "Phone": candidate.get("phone") or "",
                 "Location": candidate.get("location") or "",
+
+                "Record Status": (
+                    "Archived"
+                    if candidate.get(
+                        "is_archived",
+                        False,
+                    )
+                    else "Active"
+                ),
+
                 "Education": format_education(
                     candidate.get("education", [])
                 ),
@@ -153,13 +163,52 @@ def build_candidate_dataframe(
 
 
 def render_candidate_library() -> None:
-    candidates = load_all_candidates()
+    all_candidates = load_all_candidates()
     jobs = load_all_jobs()
+
+    archived_message = st.session_state.pop(
+        "candidate_archived_message",
+        None,
+    )
+
+    if archived_message:
+        st.success(archived_message)
+
+    show_archived = st.checkbox(
+        "Show archived candidates",
+        value=False,
+        key="candidate_show_archived",
+        help=(
+            "Archived candidates are hidden from the "
+            "normal active-candidate list."
+        ),
+    )
+
+    if show_archived:
+        candidates = all_candidates
+    else:
+        candidates = [
+            candidate
+            for candidate in all_candidates
+            if not bool(
+                candidate.get(
+                    "is_archived",
+                    False,
+                )
+            )
+        ]
 
     # st.markdown("## Candidate Library")
 
     if not candidates:
-        st.info("No CVs loaded yet.")
+        if show_archived:
+            st.info(
+                "No candidate records are available."
+            )
+        else:
+            st.info(
+                "No active candidates are available."
+            )
         return
 
     jobs_by_id = {
@@ -733,6 +782,10 @@ def render_candidate_library() -> None:
             ),
             "Candidate ID": None,
             "_Candidate Lookup Key": None,
+            "Record Status": st.column_config.TextColumn(
+                "Status",
+                width="small",
+            ),
         },
     )
 

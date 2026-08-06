@@ -106,7 +106,8 @@ def render_candidate_interview_link(session) -> None:
 
 
 def render_interview_session_page() -> None:
-    st.title("Interview Session")
+
+    # st.title("Interview Session")
 
     st.caption(
         "Create and manage recruiter-led or text-based AI interviews "

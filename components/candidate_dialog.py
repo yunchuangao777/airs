@@ -1,8 +1,6 @@
 import pandas as pd
 import streamlit as st
 
-from services.permission_service import has_permission, require_permission
-
 from match_loader import load_matches_by_candidate
 from utils.formatters import format_experience_years
 
@@ -15,7 +13,13 @@ from application_service import (
 )
 from match_loader import load_all_jobs
 from schema import CandidateStatus
-
+from services.candidate_archive_service import (
+    archive_candidate,
+)
+from services.permission_service import (
+    has_permission,
+    require_permission,
+)
 
 @st.dialog("Candidate Details", width="large")
 def show_candidate_details(candidate: dict):
@@ -272,3 +276,141 @@ def show_candidate_details(candidate: dict):
             ):
                 del st.session_state["status_update_success"]
                 st.rerun()
+
+    st.divider()
+    st.markdown("#### Candidate Record")
+
+    candidate_id = str(
+        candidate.get("candidate_id")
+        or ""
+    ).strip()
+
+    is_archived = bool(
+        candidate.get(
+            "is_archived",
+            False,
+        )
+    )
+
+    can_archive = has_permission(
+        "candidate.archive"
+    )
+
+    if is_archived:
+        st.info(
+            "This candidate is archived."
+        )
+
+        archived_at = candidate.get(
+            "archived_at"
+        )
+        archived_by = candidate.get(
+            "archived_by"
+        )
+
+        if archived_at:
+            st.write(
+                f"**Archived at:** {archived_at}"
+            )
+
+        if archived_by:
+            st.write(
+                f"**Archived by:** {archived_by}"
+            )
+
+    else:
+        st.caption(
+            "Archiving removes this candidate from "
+            "the active candidate list. Applications, "
+            "matches, interview sessions, and "
+            "evaluations will be preserved."
+        )
+
+        confirm_archive = st.checkbox(
+            "I understand and want to archive "
+            "this candidate.",
+            key=(
+                "confirm_archive_candidate_"
+                f"{candidate_id}"
+            ),
+            disabled=not can_archive,
+        )
+
+        archive_clicked = st.button(
+            "Archive Candidate",
+            type="secondary",
+            use_container_width=True,
+            key=(
+                "archive_candidate_"
+                f"{candidate_id}"
+            ),
+            disabled=(
+                not can_archive
+                or not confirm_archive
+                or not candidate_id
+            ),
+            help=(
+                None
+                if can_archive
+                else (
+                    "Your role does not have permission "
+                    "to archive candidates."
+                )
+            ),
+        )
+
+        if archive_clicked:
+            require_permission(
+                "candidate.archive",
+                message=(
+                    "You do not have permission to "
+                    "archive candidates."
+                ),
+            )
+
+            current_username = str(
+                st.session_state.get(
+                    "username",
+                    "",
+                )
+                or ""
+            ).strip()
+
+            try:
+                archived_candidate = archive_candidate(
+                    candidate_id=candidate_id,
+                    archived_by=(
+                        current_username
+                        or "unknown_user"
+                    ),
+                )
+
+                candidate_name = (
+                    archived_candidate.get("name")
+                    or candidate.get("name")
+                    or "Candidate"
+                )
+
+                st.session_state[
+                    "candidate_archived_message"
+                ] = (
+                    f"{candidate_name} was archived "
+                    "successfully."
+                )
+
+                st.session_state[
+                    "candidate_table_version"
+                ] = (
+                    st.session_state.get(
+                        "candidate_table_version",
+                        0,
+                    )
+                    + 1
+                )
+
+                st.rerun()
+
+            except Exception as exc:
+                st.error(
+                    f"Unable to archive candidate: {exc}"
+                )

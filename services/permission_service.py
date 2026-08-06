@@ -25,6 +25,7 @@ ROLE_PERMISSIONS: dict[str, set[str]] = {
         "candidate.edit",
         "candidate.delete",
         "candidate.export",
+        "candidate.archive",
 
         # Job actions
         "job.view",
@@ -71,6 +72,7 @@ ROLE_PERMISSIONS: dict[str, set[str]] = {
         "candidate.create",
         "candidate.edit",
         "candidate.export",
+        "candidate.archive",
 
         # Job actions
         "job.view",

@@ -31,6 +31,11 @@ class CVInfo(BaseModel):
     source_filename: str | None = None
     source_filepath: str | None = None
     upload_time: str | None = None
+
+    is_archived: bool = False
+    archived_at: Optional[str] = None
+    archived_by: Optional[str] = None
+
     raw_text: str | None = None
 
     name: str | None = None

@@ -66,6 +66,26 @@ def main() -> None:
         role="viewer",
     )
 
+    assert has_permission(
+        "candidate.archive",
+        role="admin",
+    )
+
+    assert has_permission(
+        "candidate.archive",
+        role="recruiter",
+    )
+
+    assert not has_permission(
+        "candidate.archive",
+        role="interviewer",
+    )
+
+    assert not has_permission(
+        "candidate.archive",
+        role="viewer",
+    )
+
     print("Admin pages:")
     print(get_allowed_pages("admin"))
 

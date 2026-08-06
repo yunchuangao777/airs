@@ -394,7 +394,8 @@ def _render_recommendation_chart(
 
 
 def render_dashboard() -> None:
-    st.title("Dashboard")
+
+    # st.title("Dashboard")
 
     st.caption(
         "Overview of candidates, jobs, applications, "

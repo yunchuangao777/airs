@@ -294,7 +294,7 @@ def render_candidate_source_settings() -> None:
         ),
     )
 
-    st.title("Candidate Source Settings")
+    # st.title("Candidate Source Settings")
 
     st.caption(
         "Choose which sources the AI Recruiter may "

@@ -320,7 +320,8 @@ def render_user_management() -> None:
         ),
     )
 
-    st.title("User Management")
+    # st.title("User Management")
+
     st.caption(
         "Manage invite-only AIRS staff accounts, roles, "
         "access status, and passwords."
